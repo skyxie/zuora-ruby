@@ -37,16 +37,16 @@ module Zuora
       return driver.update(objs)
     end
 
-    def login(endpoint, username, password, logstream=STDERR)
+    def login(username, password, logstream=STDERR)
       @credentials = ZUORA::Login.new(username, password)
 
-      @driver ||= ZUORA::Soap.new(endpoint)
+      @driver ||= ZUORA::Soap.new
       
       @session = ZUORA::SessionHeader.new
-      @session.session = @driver.login(credentials).result.session
-
       @driver.headerhandler.set @session
       @driver.wiredump_dev = logstream
+
+      @session.session = @driver.login(credentials).result.session
     end
 
     def logged_in?

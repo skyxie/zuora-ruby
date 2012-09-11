@@ -29,6 +29,7 @@ require 'soap/rpc/driver'
 module ZUORA
 
 class Soap < ::SOAP::RPC::Driver
+  DefaultEndpointUrl = "https://www.zuora.com/apps/services/a/38.0"
 
   Methods = [
     [ "",
@@ -89,7 +90,8 @@ class Soap < ::SOAP::RPC::Driver
     ]
   ]
 
-  def initialize(endpoint_url)
+  def initialize(endpoint_url = nil)
+    endpoint_url ||= DefaultEndpointUrl
     super(endpoint_url, nil)
     self.mapping_registry = DefaultMappingRegistry::EncodedRegistry
     self.literal_mapping_registry = DefaultMappingRegistry::LiteralRegistry
