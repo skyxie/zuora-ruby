@@ -3,7 +3,6 @@ require "zuora-ruby/version"
 gem "soap4r"
 require 'zuora-ruby/ZUORA'
 require 'zuora-ruby/ZUORADriver'
-require 'zuora-ruby/ZUORAMappingRegistry'
 
 class SOAP::Header::HandlerSet
   def reset
@@ -43,8 +42,8 @@ module Zuora
       @driver ||= ZUORA::Soap.new
       
       @session = ZUORA::SessionHeader.new
-      @driver.headerhandler.set @session
       @driver.wiredump_dev = logstream
+      @driver.headerhandler.set @session
 
       @session.session = @driver.login(credentials).result.session
     end

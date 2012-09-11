@@ -1,40 +1,654 @@
-#--
-#   Copyright (c) 2010 Zuora, Inc.
-#
-#  Permission is hereby granted, free of charge, to any person obtaining a copy of 
-#  this software and associated documentation files (the "Software"), to use copy, 
-#  modify, merge, publish the Software and to distribute, and sublicense copies of 
-#  the Software, provided no fee is charged for the Software.  In addition the
-#  rights specified above are conditioned upon the following:
-#
-#  The above copyright notice and this permission notice shall be included in all
-#  copies or substantial portions of the Software.
-#
-#  Zuora, Inc. or any other trademarks of Zuora, Inc.  may not be used to endorse
-#  or promote products derived from this Software without specific prior written
-#  permission from Zuora, Inc.
-#
-#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL
-#  ZUORA, INC. BE LIABLE FOR ANY DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES
-#  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-#  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-#  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-#  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-#  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#++
 require 'xsd/qname'
 
 module ZUORA
 
+# {http://api.zuora.com/}login
+class Login
+  @@schema_type = "login"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["username", "String"], ["password", "String"]]
+
+  attr_accessor :username
+  attr_accessor :password
+
+  def initialize(username = nil, password = nil)
+    @username = username
+    @password = password
+  end
+end
+
+# {http://api.zuora.com/}loginResponse
+class LoginResponse
+  @@schema_type = "loginResponse"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["result", "LoginResult"]]
+
+  attr_accessor :result
+
+  def initialize(result = nil)
+    @result = result
+  end
+end
+
+# {http://api.zuora.com/}subscribe
+class Subscribe
+  @@schema_type = "subscribe"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["subscribes", "SubscribeRequest[]"]]
+
+  attr_accessor :subscribes
+
+  def initialize(subscribes = [])
+    @subscribes = subscribes
+  end
+end
+
+# {http://api.zuora.com/}subscribeResponse
+class SubscribeResponse
+  @@schema_type = "subscribeResponse"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["result", "SubscribeResult[]"]]
+
+  attr_accessor :result
+
+  def initialize(result = [])
+    @result = result
+  end
+end
+
+# {http://api.zuora.com/}create
+class Create
+  @@schema_type = "create"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["zObjects", "ZObject[]"]]
+
+  attr_accessor :zObjects
+
+  def initialize(zObjects = [])
+    @zObjects = zObjects
+  end
+end
+
+# {http://api.zuora.com/}createResponse
+class CreateResponse
+  @@schema_type = "createResponse"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["result", "SaveResult[]"]]
+
+  attr_accessor :result
+
+  def initialize(result = [])
+    @result = result
+  end
+end
+
+# {http://api.zuora.com/}generate
+class Generate
+  @@schema_type = "generate"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["zObjects", "ZObject[]"]]
+
+  attr_accessor :zObjects
+
+  def initialize(zObjects = [])
+    @zObjects = zObjects
+  end
+end
+
+# {http://api.zuora.com/}generateResponse
+class GenerateResponse
+  @@schema_type = "generateResponse"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["result", "SaveResult[]"]]
+
+  attr_accessor :result
+
+  def initialize(result = [])
+    @result = result
+  end
+end
+
+# {http://api.zuora.com/}update
+class Update
+  @@schema_type = "update"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["zObjects", "ZObject[]"]]
+
+  attr_accessor :zObjects
+
+  def initialize(zObjects = [])
+    @zObjects = zObjects
+  end
+end
+
+# {http://api.zuora.com/}updateResponse
+class UpdateResponse
+  @@schema_type = "updateResponse"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["result", "SaveResult[]"]]
+
+  attr_accessor :result
+
+  def initialize(result = [])
+    @result = result
+  end
+end
+
+# {http://api.zuora.com/}delete
+class Delete
+  @@schema_type = "delete"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["type", "String"], ["ids", "SOAP::SOAPString[]"]]
+
+  attr_accessor :type
+  attr_accessor :ids
+
+  def initialize(type = nil, ids = [])
+    @type = type
+    @ids = ids
+  end
+end
+
+# {http://api.zuora.com/}deleteResponse
+class DeleteResponse
+  @@schema_type = "deleteResponse"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["result", "DeleteResult[]"]]
+
+  attr_accessor :result
+
+  def initialize(result = [])
+    @result = result
+  end
+end
+
+# {http://api.zuora.com/}execute
+class Execute
+  @@schema_type = "execute"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["type", "String"], ["synchronous", "Boolean"], ["ids", "SOAP::SOAPString[]"]]
+
+  attr_accessor :type
+  attr_accessor :synchronous
+  attr_accessor :ids
+
+  def initialize(type = nil, synchronous = nil, ids = [])
+    @type = type
+    @synchronous = synchronous
+    @ids = ids
+  end
+end
+
+# {http://api.zuora.com/}executeResponse
+class ExecuteResponse
+  @@schema_type = "executeResponse"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["result", "ExecuteResult[]"]]
+
+  attr_accessor :result
+
+  def initialize(result = [])
+    @result = result
+  end
+end
+
+# {http://api.zuora.com/}query
+class Query
+  @@schema_type = "query"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["queryString", "SOAP::SOAPString"]]
+
+  attr_accessor :queryString
+
+  def initialize(queryString = nil)
+    @queryString = queryString
+  end
+end
+
+# {http://api.zuora.com/}queryResponse
+class QueryResponse
+  @@schema_type = "queryResponse"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["result", "QueryResult"]]
+
+  attr_accessor :result
+
+  def initialize(result = nil)
+    @result = result
+  end
+end
+
+# {http://api.zuora.com/}queryMore
+class QueryMore
+  @@schema_type = "queryMore"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["queryLocator", "SOAP::SOAPString"]]
+
+  attr_accessor :queryLocator
+
+  def initialize(queryLocator = nil)
+    @queryLocator = queryLocator
+  end
+end
+
+# {http://api.zuora.com/}queryMoreResponse
+class QueryMoreResponse
+  @@schema_type = "queryMoreResponse"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["result", "QueryResult"]]
+
+  attr_accessor :result
+
+  def initialize(result = nil)
+    @result = result
+  end
+end
+
+# {http://api.zuora.com/}SessionHeader
+class SessionHeader
+  @@schema_type = "SessionHeader"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["session", "String"]]
+
+  attr_accessor :session
+
+  def initialize(session = nil)
+    @session = session
+  end
+    
+  def on_outbound_headeritem(test)
+    sobj = SOAP::SOAPElement.new(XSD::QName.new("ns1", 'SessionHeader'))
+    sobj.add(SOAP::SOAPElement.new(XSD::QName.new("ns1", "session"), @session))
+    ::SOAP::SOAPHeaderItem.new(sobj, false)
+  end
+end
+
+# {http://api.zuora.com/}QueryOptions
+class QueryOptions
+  @@schema_type = "QueryOptions"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["batchSize", "Int"], ["caseSensitive", "Boolean"]]
+
+  attr_accessor :batchSize
+  attr_accessor :caseSensitive
+
+  def initialize(batchSize = nil, caseSensitive = nil)
+    @batchSize = batchSize
+    @caseSensitive = caseSensitive
+  end
+end
+
+# {http://api.zuora.com/}getUserInfoResponse
+class GetUserInfoResponse
+  @@schema_type = "getUserInfoResponse"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["tenantId", ["String", XSD::QName.new("http://api.zuora.com/", "TenantId")]], ["tenantName", ["String", XSD::QName.new("http://api.zuora.com/", "TenantName")]], ["userEmail", ["String", XSD::QName.new("http://api.zuora.com/", "UserEmail")]], ["userFullName", ["String", XSD::QName.new("http://api.zuora.com/", "UserFullName")]], ["userId", ["String", XSD::QName.new("http://api.zuora.com/", "UserId")]], ["username", ["String", XSD::QName.new("http://api.zuora.com/", "Username")]]]
+
+  def TenantId
+    @tenantId
+  end
+
+  def TenantId=(value)
+    @tenantId = value
+  end
+
+  def TenantName
+    @tenantName
+  end
+
+  def TenantName=(value)
+    @tenantName = value
+  end
+
+  def UserEmail
+    @userEmail
+  end
+
+  def UserEmail=(value)
+    @userEmail = value
+  end
+
+  def UserFullName
+    @userFullName
+  end
+
+  def UserFullName=(value)
+    @userFullName = value
+  end
+
+  def UserId
+    @userId
+  end
+
+  def UserId=(value)
+    @userId = value
+  end
+
+  def Username
+    @username
+  end
+
+  def Username=(value)
+    @username = value
+  end
+
+  def initialize(tenantId = nil, tenantName = nil, userEmail = nil, userFullName = nil, userId = nil, username = nil)
+    @tenantId = tenantId
+    @tenantName = tenantName
+    @userEmail = userEmail
+    @userFullName = userFullName
+    @userId = userId
+    @username = username
+  end
+end
+
+# {http://api.zuora.com/}getUserInfo
+class GetUserInfo
+  @@schema_type = "getUserInfo"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = []
+
+  def initialize
+  end
+end
+
+# {http://api.zuora.com/}DummyHeader
+class DummyHeader
+  @@schema_type = "DummyHeader"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["account", ["Account", XSD::QName.new("http://api.zuora.com/", "Account")]], ["invoiceAdjustment", ["InvoiceAdjustment", XSD::QName.new("http://api.zuora.com/", "InvoiceAdjustment")]], ["amendment", ["Amendment", XSD::QName.new("http://api.zuora.com/", "Amendment")]], ["invoice", ["Invoice", XSD::QName.new("http://api.zuora.com/", "Invoice")]], ["invoiceItem", ["InvoiceItem", XSD::QName.new("http://api.zuora.com/", "InvoiceItem")]], ["invoicePayment", ["InvoicePayment", XSD::QName.new("http://api.zuora.com/", "InvoicePayment")]], ["import", ["Import", XSD::QName.new("http://api.zuora.com/", "Import")]], ["payment", ["Payment", XSD::QName.new("http://api.zuora.com/", "Payment")]], ["product", ["Product", XSD::QName.new("http://api.zuora.com/", "Product")]], ["productRatePlan", ["ProductRatePlan", XSD::QName.new("http://api.zuora.com/", "ProductRatePlan")]], ["productRatePlanCharge", ["ProductRatePlanCharge", XSD::QName.new("http://api.zuora.com/", "ProductRatePlanCharge")]], ["productRatePlanChargeTier", ["ProductRatePlanChargeTier", XSD::QName.new("http://api.zuora.com/", "ProductRatePlanChargeTier")]], ["ratePlan", ["RatePlan", XSD::QName.new("http://api.zuora.com/", "RatePlan")]], ["ratePlanCharge", ["RatePlanCharge", XSD::QName.new("http://api.zuora.com/", "RatePlanCharge")]], ["ratePlanChargeTier", ["RatePlanChargeTier", XSD::QName.new("http://api.zuora.com/", "RatePlanChargeTier")]], ["taxationItem", ["TaxationItem", XSD::QName.new("http://api.zuora.com/", "TaxationItem")]], ["usage", ["Usage", XSD::QName.new("http://api.zuora.com/", "Usage")]], ["refund", ["Refund", XSD::QName.new("http://api.zuora.com/", "Refund")]], ["refundInvoicePayment", ["RefundInvoicePayment", XSD::QName.new("http://api.zuora.com/", "RefundInvoicePayment")]], ["creditBalanceAdjustment", ["CreditBalanceAdjustment", XSD::QName.new("http://api.zuora.com/", "CreditBalanceAdjustment")]], ["export", ["Export", XSD::QName.new("http://api.zuora.com/", "Export")]], ["invoiceItemAdjustment", ["InvoiceItemAdjustment", XSD::QName.new("http://api.zuora.com/", "InvoiceItemAdjustment")]], ["communicationProfile", ["CommunicationProfile", XSD::QName.new("http://api.zuora.com/", "CommunicationProfile")]]]
+
+  def Account
+    @account
+  end
+
+  def Account=(value)
+    @account = value
+  end
+
+  def InvoiceAdjustment
+    @invoiceAdjustment
+  end
+
+  def InvoiceAdjustment=(value)
+    @invoiceAdjustment = value
+  end
+
+  def Amendment
+    @amendment
+  end
+
+  def Amendment=(value)
+    @amendment = value
+  end
+
+  def Invoice
+    @invoice
+  end
+
+  def Invoice=(value)
+    @invoice = value
+  end
+
+  def InvoiceItem
+    @invoiceItem
+  end
+
+  def InvoiceItem=(value)
+    @invoiceItem = value
+  end
+
+  def InvoicePayment
+    @invoicePayment
+  end
+
+  def InvoicePayment=(value)
+    @invoicePayment = value
+  end
+
+  def Import
+    @import
+  end
+
+  def Import=(value)
+    @import = value
+  end
+
+  def Payment
+    @payment
+  end
+
+  def Payment=(value)
+    @payment = value
+  end
+
+  def Product
+    @product
+  end
+
+  def Product=(value)
+    @product = value
+  end
+
+  def ProductRatePlan
+    @productRatePlan
+  end
+
+  def ProductRatePlan=(value)
+    @productRatePlan = value
+  end
+
+  def ProductRatePlanCharge
+    @productRatePlanCharge
+  end
+
+  def ProductRatePlanCharge=(value)
+    @productRatePlanCharge = value
+  end
+
+  def ProductRatePlanChargeTier
+    @productRatePlanChargeTier
+  end
+
+  def ProductRatePlanChargeTier=(value)
+    @productRatePlanChargeTier = value
+  end
+
+  def RatePlan
+    @ratePlan
+  end
+
+  def RatePlan=(value)
+    @ratePlan = value
+  end
+
+  def RatePlanCharge
+    @ratePlanCharge
+  end
+
+  def RatePlanCharge=(value)
+    @ratePlanCharge = value
+  end
+
+  def RatePlanChargeTier
+    @ratePlanChargeTier
+  end
+
+  def RatePlanChargeTier=(value)
+    @ratePlanChargeTier = value
+  end
+
+  def TaxationItem
+    @taxationItem
+  end
+
+  def TaxationItem=(value)
+    @taxationItem = value
+  end
+
+  def Usage
+    @usage
+  end
+
+  def Usage=(value)
+    @usage = value
+  end
+
+  def Refund
+    @refund
+  end
+
+  def Refund=(value)
+    @refund = value
+  end
+
+  def RefundInvoicePayment
+    @refundInvoicePayment
+  end
+
+  def RefundInvoicePayment=(value)
+    @refundInvoicePayment = value
+  end
+
+  def CreditBalanceAdjustment
+    @creditBalanceAdjustment
+  end
+
+  def CreditBalanceAdjustment=(value)
+    @creditBalanceAdjustment = value
+  end
+
+  def Export
+    @export
+  end
+
+  def Export=(value)
+    @export = value
+  end
+
+  def InvoiceItemAdjustment
+    @invoiceItemAdjustment
+  end
+
+  def InvoiceItemAdjustment=(value)
+    @invoiceItemAdjustment = value
+  end
+
+  def CommunicationProfile
+    @communicationProfile
+  end
+
+  def CommunicationProfile=(value)
+    @communicationProfile = value
+  end
+
+  def initialize(account = nil, invoiceAdjustment = nil, amendment = nil, invoice = nil, invoiceItem = nil, invoicePayment = nil, import = nil, payment = nil, product = nil, productRatePlan = nil, productRatePlanCharge = nil, productRatePlanChargeTier = nil, ratePlan = nil, ratePlanCharge = nil, ratePlanChargeTier = nil, taxationItem = nil, usage = nil, refund = nil, refundInvoicePayment = nil, creditBalanceAdjustment = nil, export = nil, invoiceItemAdjustment = nil, communicationProfile = nil)
+    @account = account
+    @invoiceAdjustment = invoiceAdjustment
+    @amendment = amendment
+    @invoice = invoice
+    @invoiceItem = invoiceItem
+    @invoicePayment = invoicePayment
+    @import = import
+    @payment = payment
+    @product = product
+    @productRatePlan = productRatePlan
+    @productRatePlanCharge = productRatePlanCharge
+    @productRatePlanChargeTier = productRatePlanChargeTier
+    @ratePlan = ratePlan
+    @ratePlanCharge = ratePlanCharge
+    @ratePlanChargeTier = ratePlanChargeTier
+    @taxationItem = taxationItem
+    @usage = usage
+    @refund = refund
+    @refundInvoicePayment = refundInvoicePayment
+    @creditBalanceAdjustment = creditBalanceAdjustment
+    @export = export
+    @invoiceItemAdjustment = invoiceItemAdjustment
+    @communicationProfile = communicationProfile
+  end
+end
+
+# {http://api.zuora.com/}CallOptions
+class CallOptions
+  @@schema_type = "CallOptions"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["useSingleTransaction", "Boolean"]]
+
+  attr_accessor :useSingleTransaction
+
+  def initialize(useSingleTransaction = nil)
+    @useSingleTransaction = useSingleTransaction
+  end
+end
+
+# {http://api.zuora.com/}amend
+class Amend
+  @@schema_type = "amend"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["requests", "AmendRequest[]"]]
+
+  attr_accessor :requests
+
+  def initialize(requests = [])
+    @requests = requests
+  end
+end
+
+# {http://api.zuora.com/}amendResponse
+class AmendResponse
+  @@schema_type = "amendResponse"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_qualified = "true"
+  @@schema_element = [["results", "AmendResult[]"]]
+
+  attr_accessor :results
+
+  def initialize(results = [])
+    @results = results
+  end
+end
 
 # {http://object.api.zuora.com/}zObject
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
 class ZObject
+  @@schema_type = "zObject"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = [["fieldsToNull", "String[]"], ["id", ["SOAP::SOAPString", XSD::QName.new("http://object.api.zuora.com/", "Id")]]]
+
   attr_accessor :fieldsToNull
-  attr_accessor :id
+
+  def Id
+    @id
+  end
+
+  def Id=(value)
+    @id = value
+  end
 
   def initialize(fieldsToNull = [], id = nil)
     @fieldsToNull = fieldsToNull
@@ -43,767 +657,316 @@ class ZObject
 end
 
 # {http://object.api.zuora.com/}Account
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   accountNumber - SOAP::SOAPString
-#   allowInvoiceEdit - SOAP::SOAPBoolean
-#   autoPay - SOAP::SOAPBoolean
-#   batch - SOAP::SOAPString
-#   billCycleDay - SOAP::SOAPInt
-#   billToId - (any)
-#   createdDate - SOAP::SOAPDateTime
-#   crmId - SOAP::SOAPString
-#   currency - SOAP::SOAPString
-#   customerServiceRepName - SOAP::SOAPString
-#   defaultPaymentMethodId - (any)
-#   name - SOAP::SOAPString
-#   notes - SOAP::SOAPString
-#   paymentTerm - SOAP::SOAPString
-#   purchaseOrderNumber - SOAP::SOAPString
-#   salesRepName - SOAP::SOAPString
-#   soldToId - (any)
-#   status - SOAP::SOAPString
-#   updatedDate - SOAP::SOAPDateTime
-class Account < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :accountNumber
-  attr_accessor :allowInvoiceEdit
-  attr_accessor :autoPay
-  attr_accessor :batch
-  attr_accessor :billCycleDay
-  attr_accessor :billToId
-  attr_accessor :createdDate
-  attr_accessor :crmId
-  attr_accessor :currency
-  attr_accessor :customerServiceRepName
-  attr_accessor :defaultPaymentMethodId
-  attr_accessor :name
-  attr_accessor :notes
-  attr_accessor :paymentTerm
-  attr_accessor :purchaseOrderNumber
-  attr_accessor :salesRepName
-  attr_accessor :soldToId
-  attr_accessor :status
-  attr_accessor :updatedDate
+class Account
+  @@schema_type = "Account"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, accountNumber = nil, allowInvoiceEdit = nil, autoPay = nil, batch = nil, billCycleDay = nil, billToId = nil, createdDate = nil, crmId = nil, currency = nil, customerServiceRepName = nil, defaultPaymentMethodId = nil, name = nil, notes = nil, paymentTerm = nil, purchaseOrderNumber = nil, salesRepName = nil, soldToId = nil, status = nil, updatedDate = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @accountNumber = accountNumber
-    @allowInvoiceEdit = allowInvoiceEdit
-    @autoPay = autoPay
-    @batch = batch
-    @billCycleDay = billCycleDay
-    @billToId = billToId
-    @createdDate = createdDate
-    @crmId = crmId
-    @currency = currency
-    @customerServiceRepName = customerServiceRepName
-    @defaultPaymentMethodId = defaultPaymentMethodId
-    @name = name
-    @notes = notes
-    @paymentTerm = paymentTerm
-    @purchaseOrderNumber = purchaseOrderNumber
-    @salesRepName = salesRepName
-    @soldToId = soldToId
-    @status = status
-    @updatedDate = updatedDate
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}InvoiceAdjustment
+class InvoiceAdjustment
+  @@schema_type = "InvoiceAdjustment"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}InvoiceItemAdjustment
+class InvoiceItemAdjustment
+  @@schema_type = "InvoiceItemAdjustment"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}Amendment
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   contractEffectiveDate - SOAP::SOAPDateTime
-#   customerAcceptanceDate - SOAP::SOAPDateTime
-#   description - SOAP::SOAPString
-#   effectiveDate - SOAP::SOAPDateTime
-#   initialTerm - SOAP::SOAPLong
-#   name - SOAP::SOAPString
-#   renewalTerm - SOAP::SOAPLong
-#   serviceActivationDate - SOAP::SOAPDateTime
-#   status - SOAP::SOAPString
-#   subscriptionId - (any)
-#   termCommitment - SOAP::SOAPString
-#   termStartDate - SOAP::SOAPDateTime
-#   type - SOAP::SOAPString
-class Amendment < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :contractEffectiveDate
-  attr_accessor :customerAcceptanceDate
-  attr_accessor :description
-  attr_accessor :effectiveDate
-  attr_accessor :initialTerm
-  attr_accessor :name
-  attr_accessor :renewalTerm
-  attr_accessor :serviceActivationDate
-  attr_accessor :status
-  attr_accessor :subscriptionId
-  attr_accessor :termCommitment
-  attr_accessor :termStartDate
-  attr_accessor :type
+class Amendment
+  @@schema_type = "Amendment"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, contractEffectiveDate = nil, customerAcceptanceDate = nil, description = nil, effectiveDate = nil, initialTerm = nil, name = nil, renewalTerm = nil, serviceActivationDate = nil, status = nil, subscriptionId = nil, termCommitment = nil, termStartDate = nil, type = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @contractEffectiveDate = contractEffectiveDate
-    @customerAcceptanceDate = customerAcceptanceDate
-    @description = description
-    @effectiveDate = effectiveDate
-    @initialTerm = initialTerm
-    @name = name
-    @renewalTerm = renewalTerm
-    @serviceActivationDate = serviceActivationDate
-    @status = status
-    @subscriptionId = subscriptionId
-    @termCommitment = termCommitment
-    @termStartDate = termStartDate
-    @type = type
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}Contact
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   accountId - (any)
-#   address1 - SOAP::SOAPString
-#   address2 - SOAP::SOAPString
-#   city - SOAP::SOAPString
-#   country - SOAP::SOAPString
-#   createdDate - SOAP::SOAPDateTime
-#   fax - SOAP::SOAPString
-#   firstName - SOAP::SOAPString
-#   homePhone - SOAP::SOAPString
-#   lastName - SOAP::SOAPString
-#   mobilePhone - SOAP::SOAPString
-#   nickName - SOAP::SOAPString
-#   otherPhone - SOAP::SOAPString
-#   otherPhoneType - SOAP::SOAPString
-#   personalEmail - SOAP::SOAPString
-#   postalCode - SOAP::SOAPString
-#   state - SOAP::SOAPString
-#   updatedDate - SOAP::SOAPDateTime
-#   workEmail - SOAP::SOAPString
-#   workPhone - SOAP::SOAPString
-class Contact < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :accountId
-  attr_accessor :address1
-  attr_accessor :address2
-  attr_accessor :city
-  attr_accessor :country
-  attr_accessor :createdDate
-  attr_accessor :fax
-  attr_accessor :firstName
-  attr_accessor :homePhone
-  attr_accessor :lastName
-  attr_accessor :mobilePhone
-  attr_accessor :nickName
-  attr_accessor :otherPhone
-  attr_accessor :otherPhoneType
-  attr_accessor :personalEmail
-  attr_accessor :postalCode
-  attr_accessor :state
-  attr_accessor :updatedDate
-  attr_accessor :workEmail
-  attr_accessor :workPhone
+class Contact
+  @@schema_type = "Contact"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, accountId = nil, address1 = nil, address2 = nil, city = nil, country = nil, createdDate = nil, fax = nil, firstName = nil, homePhone = nil, lastName = nil, mobilePhone = nil, nickName = nil, otherPhone = nil, otherPhoneType = nil, personalEmail = nil, postalCode = nil, state = nil, updatedDate = nil, workEmail = nil, workPhone = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @accountId = accountId
-    @address1 = address1
-    @address2 = address2
-    @city = city
-    @country = country
-    @createdDate = createdDate
-    @fax = fax
-    @firstName = firstName
-    @homePhone = homePhone
-    @lastName = lastName
-    @mobilePhone = mobilePhone
-    @nickName = nickName
-    @otherPhone = otherPhone
-    @otherPhoneType = otherPhoneType
-    @personalEmail = personalEmail
-    @postalCode = postalCode
-    @state = state
-    @updatedDate = updatedDate
-    @workEmail = workEmail
-    @workPhone = workPhone
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}Invoice
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   accountId - (any)
-#   amount - SOAP::SOAPDouble
-#   balance - SOAP::SOAPDouble
-#   body - SOAP::SOAPString
-#   dueDate - SOAP::SOAPDateTime
-#   invoiceDate - SOAP::SOAPDateTime
-#   invoiceNumber - SOAP::SOAPString
-#   status - SOAP::SOAPString
-#   targetDate - SOAP::SOAPDateTime
-class Invoice < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :accountId
-  attr_accessor :amount
-  attr_accessor :balance
-  attr_accessor :body
-  attr_accessor :dueDate
-  attr_accessor :invoiceDate
-  attr_accessor :invoiceNumber
-  attr_accessor :status
-  attr_accessor :targetDate
+class Invoice
+  @@schema_type = "Invoice"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, accountId = nil, amount = nil, balance = nil, body = nil, dueDate = nil, invoiceDate = nil, invoiceNumber = nil, status = nil, targetDate = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @accountId = accountId
-    @amount = amount
-    @balance = balance
-    @body = body
-    @dueDate = dueDate
-    @invoiceDate = invoiceDate
-    @invoiceNumber = invoiceNumber
-    @status = status
-    @targetDate = targetDate
+  def initialize
   end
 end
 
-# {http://object.api.zuora.com/}Payment
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   accountId - (any)
-#   amount - SOAP::SOAPDouble
-#   comment - SOAP::SOAPString
-#   effectiveDate - SOAP::SOAPDateTime
-#   paymentMethodId - (any)
-#   referenceId - SOAP::SOAPString
-#   status - SOAP::SOAPString
-#   type - SOAP::SOAPString
-class Payment < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :accountId
-  attr_accessor :amount
-  attr_accessor :comment
-  attr_accessor :effectiveDate
-  attr_accessor :paymentMethodId
-  attr_accessor :referenceId
-  attr_accessor :status
-  attr_accessor :type
+# {http://object.api.zuora.com/}Refund
+class Refund
+  @@schema_type = "Refund"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, accountId = nil, amount = nil, comment = nil, effectiveDate = nil, paymentMethodId = nil, referenceId = nil, status = nil, type = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @accountId = accountId
-    @amount = amount
-    @comment = comment
-    @effectiveDate = effectiveDate
-    @paymentMethodId = paymentMethodId
-    @referenceId = referenceId
-    @status = status
-    @type = type
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}RefundInvoicePayment
+class RefundInvoicePayment
+  @@schema_type = "RefundInvoicePayment"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}RefundTransactionLog
+class RefundTransactionLog
+  @@schema_type = "RefundTransactionLog"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}InvoiceItem
+class InvoiceItem
+  @@schema_type = "InvoiceItem"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}InvoicePayment
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   amount - SOAP::SOAPDouble
-#   invoiceId - (any)
-#   paymentId - (any)
-class InvoicePayment < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :amount
-  attr_accessor :invoiceId
-  attr_accessor :paymentId
+class InvoicePayment
+  @@schema_type = "InvoicePayment"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, amount = nil, invoiceId = nil, paymentId = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @amount = amount
-    @invoiceId = invoiceId
-    @paymentId = paymentId
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}Payment
+class Payment
+  @@schema_type = "Payment"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}PaymentTransactionLog
+class PaymentTransactionLog
+  @@schema_type = "PaymentTransactionLog"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}PaymentMethod
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   accountId - (any)
-#   achAbaCode - SOAP::SOAPString
-#   achAccountName - SOAP::SOAPString
-#   achAccountNumber - SOAP::SOAPString
-#   achAccountNumberMask - SOAP::SOAPString
-#   achAccountType - SOAP::SOAPString
-#   achBankName - SOAP::SOAPString
-#   active - SOAP::SOAPBoolean
-#   createdDate - SOAP::SOAPDateTime
-#   creditCardAddress1 - SOAP::SOAPString
-#   creditCardAddress2 - SOAP::SOAPString
-#   creditCardCity - SOAP::SOAPString
-#   creditCardCountry - SOAP::SOAPString
-#   creditCardExpirationMonth - SOAP::SOAPInt
-#   creditCardExpirationYear - SOAP::SOAPInt
-#   creditCardHolderName - SOAP::SOAPString
-#   creditCardMaskNumber - SOAP::SOAPString
-#   creditCardNumber - SOAP::SOAPString
-#   creditCardPostalCode - SOAP::SOAPString
-#   creditCardState - SOAP::SOAPString
-#   creditCardType - SOAP::SOAPString
-#   lastTransactionDateTime - SOAP::SOAPDateTime
-#   lastTransactionStatus - SOAP::SOAPString
-#   name - SOAP::SOAPString
-#   paypalBaid - SOAP::SOAPString
-#   paypalEmail - SOAP::SOAPString
-#   type - SOAP::SOAPString
-#   updatedDate - SOAP::SOAPDateTime
-class PaymentMethod < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :accountId
-  attr_accessor :achAbaCode
-  attr_accessor :achAccountName
-  attr_accessor :achAccountNumber
-  attr_accessor :achAccountNumberMask
-  attr_accessor :achAccountType
-  attr_accessor :achBankName
-  attr_accessor :active
-  attr_accessor :createdDate
-  attr_accessor :creditCardAddress1
-  attr_accessor :creditCardAddress2
-  attr_accessor :creditCardCity
-  attr_accessor :creditCardCountry
-  attr_accessor :creditCardExpirationMonth
-  attr_accessor :creditCardExpirationYear
-  attr_accessor :creditCardHolderName
-  attr_accessor :creditCardMaskNumber
-  attr_accessor :creditCardNumber
-  attr_accessor :creditCardPostalCode
-  attr_accessor :creditCardState
-  attr_accessor :creditCardType
-  attr_accessor :lastTransactionDateTime
-  attr_accessor :lastTransactionStatus
-  attr_accessor :name
-  attr_accessor :paypalBaid
-  attr_accessor :paypalEmail
-  attr_accessor :type
-  attr_accessor :updatedDate
+class PaymentMethod
+  @@schema_type = "PaymentMethod"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, accountId = nil, achAbaCode = nil, achAccountName = nil, achAccountNumber = nil, achAccountNumberMask = nil, achAccountType = nil, achBankName = nil, active = nil, createdDate = nil, creditCardAddress1 = nil, creditCardAddress2 = nil, creditCardCity = nil, creditCardCountry = nil, creditCardExpirationMonth = nil, creditCardExpirationYear = nil, creditCardHolderName = nil, creditCardMaskNumber = nil, creditCardNumber = nil, creditCardPostalCode = nil, creditCardState = nil, creditCardType = nil, lastTransactionDateTime = nil, lastTransactionStatus = nil, name = nil, paypalBaid = nil, paypalEmail = nil, type = nil, updatedDate = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @accountId = accountId
-    @achAbaCode = achAbaCode
-    @achAccountName = achAccountName
-    @achAccountNumber = achAccountNumber
-    @achAccountNumberMask = achAccountNumberMask
-    @achAccountType = achAccountType
-    @achBankName = achBankName
-    @active = active
-    @createdDate = createdDate
-    @creditCardAddress1 = creditCardAddress1
-    @creditCardAddress2 = creditCardAddress2
-    @creditCardCity = creditCardCity
-    @creditCardCountry = creditCardCountry
-    @creditCardExpirationMonth = creditCardExpirationMonth
-    @creditCardExpirationYear = creditCardExpirationYear
-    @creditCardHolderName = creditCardHolderName
-    @creditCardMaskNumber = creditCardMaskNumber
-    @creditCardNumber = creditCardNumber
-    @creditCardPostalCode = creditCardPostalCode
-    @creditCardState = creditCardState
-    @creditCardType = creditCardType
-    @lastTransactionDateTime = lastTransactionDateTime
-    @lastTransactionStatus = lastTransactionStatus
-    @name = name
-    @paypalBaid = paypalBaid
-    @paypalEmail = paypalEmail
-    @type = type
-    @updatedDate = updatedDate
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}Product
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   description - SOAP::SOAPString
-#   effectiveEndDate - SOAP::SOAPDateTime
-#   effectiveStartDate - SOAP::SOAPDateTime
-#   name - SOAP::SOAPString
-#   sKU - SOAP::SOAPString
-class Product < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :description
-  attr_accessor :effectiveEndDate
-  attr_accessor :effectiveStartDate
-  attr_accessor :name
-  attr_accessor :sKU
+class Product
+  @@schema_type = "Product"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, description = nil, effectiveEndDate = nil, effectiveStartDate = nil, name = nil, sKU = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @description = description
-    @effectiveEndDate = effectiveEndDate
-    @effectiveStartDate = effectiveStartDate
-    @name = name
-    @sKU = sKU
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}ProductRatePlan
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   description - SOAP::SOAPString
-#   effectiveEndDate - SOAP::SOAPDateTime
-#   effectiveStartDate - SOAP::SOAPDateTime
-#   name - SOAP::SOAPString
-#   productId - (any)
-class ProductRatePlan < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :description
-  attr_accessor :effectiveEndDate
-  attr_accessor :effectiveStartDate
-  attr_accessor :name
-  attr_accessor :productId
+class ProductRatePlan
+  @@schema_type = "ProductRatePlan"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, description = nil, effectiveEndDate = nil, effectiveStartDate = nil, name = nil, productId = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @description = description
-    @effectiveEndDate = effectiveEndDate
-    @effectiveStartDate = effectiveStartDate
-    @name = name
-    @productId = productId
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}ProductRatePlanCharge
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   accountingCode - SOAP::SOAPString
-#   defaultQuantity - SOAP::SOAPDouble
-#   description - SOAP::SOAPString
-#   maxQuantity - SOAP::SOAPDouble
-#   minQuantity - SOAP::SOAPDouble
-#   model - SOAP::SOAPString
-#   productRatePlanId - (any)
-#   type - SOAP::SOAPString
-#   uOM - SOAP::SOAPString
-class ProductRatePlanCharge < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :accountingCode
-  attr_accessor :defaultQuantity
-  attr_accessor :description
-  attr_accessor :maxQuantity
-  attr_accessor :minQuantity
-  attr_accessor :model
-  attr_accessor :name
-  attr_accessor :productRatePlanId
-  attr_accessor :type
-  attr_accessor :uOM
+class ProductRatePlanCharge
+  @@schema_type = "ProductRatePlanCharge"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, accountingCode = nil, defaultQuantity = nil, description = nil, maxQuantity = nil, minQuantity = nil, model = nil, name = nil, productRatePlanId = nil, type = nil, uOM = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @accountingCode = accountingCode
-    @defaultQuantity = defaultQuantity
-    @description = description
-    @maxQuantity = maxQuantity
-    @minQuantity = minQuantity
-    @model = model
-    @name = name
-    @productRatePlanId = productRatePlanId
-    @type = type
-    @uOM = uOM
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}ProductRatePlanChargeTier
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   endingUnit - SOAP::SOAPDouble
-#   price - SOAP::SOAPDouble
-#   productRatePlanChargeId - (any)
-#   startingUnit - SOAP::SOAPDouble
-#   tier - SOAP::SOAPInt
-class ProductRatePlanChargeTier < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :endingUnit
-  attr_accessor :price
-  attr_accessor :productRatePlanChargeId
-  attr_accessor :startingUnit
-  attr_accessor :tier
+class ProductRatePlanChargeTier
+  @@schema_type = "ProductRatePlanChargeTier"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, endingUnit = nil, price = nil, productRatePlanChargeId = nil, startingUnit = nil, tier = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @endingUnit = endingUnit
-    @price = price
-    @productRatePlanChargeId = productRatePlanChargeId
-    @startingUnit = startingUnit
-    @tier = tier
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}GatewayOption
+class GatewayOption
+  @@schema_type = "GatewayOption"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}RatePlan
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   amendmentId - (any)
-#   amendmentSubscriptionRatePlanId - (any)
-#   amendmentType - SOAP::SOAPString
-#   name - SOAP::SOAPString
-#   productRatePlanId - (any)
-#   subscriptionId - (any)
-class RatePlan < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :amendmentId
-  attr_accessor :amendmentSubscriptionRatePlanId
-  attr_accessor :amendmentType
-  attr_accessor :name
-  attr_accessor :productRatePlanId
-  attr_accessor :subscriptionId
+class RatePlan
+  @@schema_type = "RatePlan"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, amendmentId = nil, amendmentSubscriptionRatePlanId = nil, amendmentType = nil, name = nil, productRatePlanId = nil, subscriptionId = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @amendmentId = amendmentId
-    @amendmentSubscriptionRatePlanId = amendmentSubscriptionRatePlanId
-    @amendmentType = amendmentType
-    @name = name
-    @productRatePlanId = productRatePlanId
-    @subscriptionId = subscriptionId
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}RatePlanCharge
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   accountingCode - SOAP::SOAPString
-#   chargeModel - SOAP::SOAPString
-#   chargeNumber - SOAP::SOAPString
-#   chargeType - SOAP::SOAPString
-#   description - SOAP::SOAPString
-#   dMRC - SOAP::SOAPDouble
-#   dTCV - SOAP::SOAPDouble
-#   includedUnits - SOAP::SOAPDouble
-#   mRR - SOAP::SOAPDouble
-#   name - SOAP::SOAPString
-#   numberOfPeriods - SOAP::SOAPLong
-#   overagePrice - SOAP::SOAPDouble
-#   price - SOAP::SOAPDouble
-#   productRatePlanChargeId - (any)
-#   quantity - SOAP::SOAPDouble
-#   ratePlanId - (any)
-#   tCV - SOAP::SOAPDouble
-#   triggerEvent - SOAP::SOAPString
-#   uOM - SOAP::SOAPString
-class RatePlanCharge < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :accountingCode
-  attr_accessor :chargeModel
-  attr_accessor :chargeNumber
-  attr_accessor :chargeType
-  attr_accessor :description
-  attr_accessor :dMRC
-  attr_accessor :dTCV
-  attr_accessor :includedUnits
-  attr_accessor :mRR
-  attr_accessor :name
-  attr_accessor :numberOfPeriods
-  attr_accessor :overagePrice
-  attr_accessor :price
-  attr_accessor :productRatePlanChargeId
-  attr_accessor :quantity
-  attr_accessor :ratePlanId
-  attr_accessor :tCV
-  attr_accessor :triggerEvent
-  attr_accessor :uOM
+class RatePlanCharge
+  @@schema_type = "RatePlanCharge"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, accountingCode = nil, chargeModel = nil, chargeNumber = nil, chargeType = nil, description = nil, dMRC = nil, dTCV = nil, includedUnits = nil, mRR = nil, name = nil, numberOfPeriods = nil, overagePrice = nil, price = nil, productRatePlanChargeId = nil, quantity = nil, ratePlanId = nil, tCV = nil, triggerEvent = nil, uOM = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @accountingCode = accountingCode
-    @chargeModel = chargeModel
-    @chargeNumber = chargeNumber
-    @chargeType = chargeType
-    @description = description
-    @dMRC = dMRC
-    @dTCV = dTCV
-    @includedUnits = includedUnits
-    @mRR = mRR
-    @name = name
-    @numberOfPeriods = numberOfPeriods
-    @overagePrice = overagePrice
-    @price = price
-    @productRatePlanChargeId = productRatePlanChargeId
-    @quantity = quantity
-    @ratePlanId = ratePlanId
-    @tCV = tCV
-    @triggerEvent = triggerEvent
-    @uOM = uOM
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}RatePlanChargeTier
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   endingUnit - SOAP::SOAPDouble
-#   price - SOAP::SOAPDouble
-#   priceFormat - SOAP::SOAPString
-#   ratePlanChargeId - (any)
-#   startingUnit - SOAP::SOAPDouble
-#   tier - SOAP::SOAPInt
-class RatePlanChargeTier < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :endingUnit
-  attr_accessor :price
-  attr_accessor :priceFormat
-  attr_accessor :ratePlanChargeId
-  attr_accessor :startingUnit
-  attr_accessor :tier
+class RatePlanChargeTier
+  @@schema_type = "RatePlanChargeTier"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, endingUnit = nil, price = nil, priceFormat = nil, ratePlanChargeId = nil, startingUnit = nil, tier = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @endingUnit = endingUnit
-    @price = price
-    @priceFormat = priceFormat
-    @ratePlanChargeId = ratePlanChargeId
-    @startingUnit = startingUnit
-    @tier = tier
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}Subscription
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   accountId - (any)
-#   autoRenew - SOAP::SOAPBoolean
-#   cancelledDate - SOAP::SOAPDateTime
-#   contractAcceptanceDate - SOAP::SOAPDateTime
-#   contractEffectiveDate - SOAP::SOAPDateTime
-#   currency - SOAP::SOAPString
-#   initialTerm - SOAP::SOAPInt
-#   name - SOAP::SOAPString
-#   notes - SOAP::SOAPString
-#   originalSubscriptionId - SOAP::SOAPString
-#   previousSubscriptionId - SOAP::SOAPString
-#   renewalTerm - SOAP::SOAPInt
-#   serviceActivationDate - SOAP::SOAPDateTime
-#   status - SOAP::SOAPString
-#   termStartDate - SOAP::SOAPDateTime
-#   version - SOAP::SOAPInt
-class Subscription < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :accountId
-  attr_accessor :autoRenew
-  attr_accessor :cancelledDate
-  attr_accessor :contractAcceptanceDate
-  attr_accessor :contractEffectiveDate
-  attr_accessor :currency
-  attr_accessor :initialTerm
-  attr_accessor :name
-  attr_accessor :notes
-  attr_accessor :originalSubscriptionId
-  attr_accessor :previousSubscriptionId
-  attr_accessor :renewalTerm
-  attr_accessor :serviceActivationDate
-  attr_accessor :status
-  attr_accessor :termStartDate
-  attr_accessor :version
+class Subscription
+  @@schema_type = "Subscription"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, accountId = nil, autoRenew = nil, cancelledDate = nil, contractAcceptanceDate = nil, contractEffectiveDate = nil, currency = nil, initialTerm = nil, name = nil, notes = nil, originalSubscriptionId = nil, previousSubscriptionId = nil, renewalTerm = nil, serviceActivationDate = nil, status = nil, termStartDate = nil, version = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @accountId = accountId
-    @autoRenew = autoRenew
-    @cancelledDate = cancelledDate
-    @contractAcceptanceDate = contractAcceptanceDate
-    @contractEffectiveDate = contractEffectiveDate
-    @currency = currency
-    @initialTerm = initialTerm
-    @name = name
-    @notes = notes
-    @originalSubscriptionId = originalSubscriptionId
-    @previousSubscriptionId = previousSubscriptionId
-    @renewalTerm = renewalTerm
-    @serviceActivationDate = serviceActivationDate
-    @status = status
-    @termStartDate = termStartDate
-    @version = version
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}TaxationItem
+class TaxationItem
+  @@schema_type = "TaxationItem"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
   end
 end
 
 # {http://object.api.zuora.com/}Usage
-#   fieldsToNull - SOAP::SOAPString
-#   id - (any)
-#   accountId - (any)
-#   chargeNumber - SOAP::SOAPString
-#   endDateTime - SOAP::SOAPDateTime
-#   quantity - SOAP::SOAPDouble
-#   rbeStatus - SOAP::SOAPString
-#   sourceName - SOAP::SOAPString
-#   sourceType - SOAP::SOAPString
-#   startDateTime - SOAP::SOAPDateTime
-#   submissionDateTime - SOAP::SOAPDateTime
-#   subscriptionNumber - SOAP::SOAPString
-#   uOM - SOAP::SOAPString
-class Usage < ZObject
-  attr_accessor :fieldsToNull
-  attr_accessor :id
-  attr_accessor :accountId
-  attr_accessor :chargeNumber
-  attr_accessor :endDateTime
-  attr_accessor :quantity
-  attr_accessor :rbeStatus
-  attr_accessor :sourceName
-  attr_accessor :sourceType
-  attr_accessor :startDateTime
-  attr_accessor :submissionDateTime
-  attr_accessor :subscriptionNumber
-  attr_accessor :uOM
+class Usage
+  @@schema_type = "Usage"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(fieldsToNull = [], id = nil, accountId = nil, chargeNumber = nil, endDateTime = nil, quantity = nil, rbeStatus = nil, sourceName = nil, sourceType = nil, startDateTime = nil, submissionDateTime = nil, subscriptionNumber = nil, uOM = nil)
-    @fieldsToNull = fieldsToNull
-    @id = id
-    @accountId = accountId
-    @chargeNumber = chargeNumber
-    @endDateTime = endDateTime
-    @quantity = quantity
-    @rbeStatus = rbeStatus
-    @sourceName = sourceName
-    @sourceType = sourceType
-    @startDateTime = startDateTime
-    @submissionDateTime = submissionDateTime
-    @subscriptionNumber = subscriptionNumber
-    @uOM = uOM
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}Import
+class Import
+  @@schema_type = "Import"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}CreditBalanceAdjustment
+class CreditBalanceAdjustment
+  @@schema_type = "CreditBalanceAdjustment"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}Export
+class Export
+  @@schema_type = "Export"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
+  end
+end
+
+# {http://object.api.zuora.com/}CommunicationProfile
+class CommunicationProfile
+  @@schema_type = "CommunicationProfile"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = []
+
+  def initialize
   end
 end
 
 # {http://api.zuora.com/}LoginResult
-#   session - SOAP::SOAPString
-#   serverUrl - SOAP::SOAPString
 class LoginResult
-  attr_accessor :session
-  attr_accessor :serverUrl
+  @@schema_type = "LoginResult"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["session", ["SOAP::SOAPString", XSD::QName.new("http://api.zuora.com/", "Session")]], ["serverUrl", ["SOAP::SOAPString", XSD::QName.new("http://api.zuora.com/", "ServerUrl")]]]
+
+  def Session
+    @session
+  end
+
+  def Session=(value)
+    @session = value
+  end
+
+  def ServerUrl
+    @serverUrl
+  end
+
+  def ServerUrl=(value)
+    @serverUrl = value
+  end
 
   def initialize(session = nil, serverUrl = nil)
     @session = session
@@ -812,65 +975,155 @@ class LoginResult
 end
 
 # {http://api.zuora.com/}SubscribeRequest
-#   account - ZUORA::Account
-#   paymentMethod - ZUORA::PaymentMethod
-#   billToContact - ZUORA::Contact
-#   soldToContact - ZUORA::Contact
-#   subscribeOptions - ZUORA::SubscribeOptions
-#   subscriptionData - ZUORA::SubscriptionData
 class SubscribeRequest
-  attr_accessor :account
-  attr_accessor :paymentMethod
-  attr_accessor :billToContact
-  attr_accessor :soldToContact
-  attr_accessor :subscribeOptions
-  attr_accessor :subscriptionData
+  @@schema_type = "SubscribeRequest"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["account", ["Account", XSD::QName.new("http://api.zuora.com/", "Account")]], ["paymentMethod", ["PaymentMethod", XSD::QName.new("http://api.zuora.com/", "PaymentMethod")]], ["billToContact", ["Contact", XSD::QName.new("http://api.zuora.com/", "BillToContact")]], ["previewOptions", ["PreviewOptions", XSD::QName.new("http://api.zuora.com/", "PreviewOptions")]], ["soldToContact", ["Contact", XSD::QName.new("http://api.zuora.com/", "SoldToContact")]], ["subscribeOptions", ["SubscribeOptions", XSD::QName.new("http://api.zuora.com/", "SubscribeOptions")]], ["subscriptionData", ["SubscriptionData", XSD::QName.new("http://api.zuora.com/", "SubscriptionData")]]]
 
-  def initialize(account = nil, paymentMethod = nil, billToContact = nil, soldToContact = nil, subscribeOptions = nil, subscriptionData = nil)
+  def Account
+    @account
+  end
+
+  def Account=(value)
+    @account = value
+  end
+
+  def PaymentMethod
+    @paymentMethod
+  end
+
+  def PaymentMethod=(value)
+    @paymentMethod = value
+  end
+
+  def BillToContact
+    @billToContact
+  end
+
+  def BillToContact=(value)
+    @billToContact = value
+  end
+
+  def PreviewOptions
+    @previewOptions
+  end
+
+  def PreviewOptions=(value)
+    @previewOptions = value
+  end
+
+  def SoldToContact
+    @soldToContact
+  end
+
+  def SoldToContact=(value)
+    @soldToContact = value
+  end
+
+  def SubscribeOptions
+    @subscribeOptions
+  end
+
+  def SubscribeOptions=(value)
+    @subscribeOptions = value
+  end
+
+  def SubscriptionData
+    @subscriptionData
+  end
+
+  def SubscriptionData=(value)
+    @subscriptionData = value
+  end
+
+  def initialize(account = nil, paymentMethod = nil, billToContact = nil, previewOptions = nil, soldToContact = nil, subscribeOptions = nil, subscriptionData = nil)
     @account = account
     @paymentMethod = paymentMethod
     @billToContact = billToContact
+    @previewOptions = previewOptions
     @soldToContact = soldToContact
     @subscribeOptions = subscribeOptions
     @subscriptionData = subscriptionData
   end
 end
 
-# {http://api.zuora.com/}SubscribeWithExistingAccountRequest
-#   accountId - (any)
-#   subscribeOptions - ZUORA::SubscribeOptions
-#   subscriptionData - ZUORA::SubscriptionData
-class SubscribeWithExistingAccountRequest
-  attr_accessor :accountId
-  attr_accessor :subscribeOptions
-  attr_accessor :subscriptionData
+# {http://api.zuora.com/}SubscribeOptions
+class SubscribeOptions
+  @@schema_type = "SubscribeOptions"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["generateInvoice", ["SOAP::SOAPBoolean", XSD::QName.new("http://api.zuora.com/", "GenerateInvoice")]], ["processPayments", ["SOAP::SOAPBoolean", XSD::QName.new("http://api.zuora.com/", "ProcessPayments")]], ["subscribeInvoiceProcessingOptions", ["SubscribeInvoiceProcessingOptions", XSD::QName.new("http://api.zuora.com/", "SubscribeInvoiceProcessingOptions")]]]
 
-  def initialize(accountId = nil, subscribeOptions = nil, subscriptionData = nil)
-    @accountId = accountId
-    @subscribeOptions = subscribeOptions
-    @subscriptionData = subscriptionData
+  def GenerateInvoice
+    @generateInvoice
+  end
+
+  def GenerateInvoice=(value)
+    @generateInvoice = value
+  end
+
+  def ProcessPayments
+    @processPayments
+  end
+
+  def ProcessPayments=(value)
+    @processPayments = value
+  end
+
+  def SubscribeInvoiceProcessingOptions
+    @subscribeInvoiceProcessingOptions
+  end
+
+  def SubscribeInvoiceProcessingOptions=(value)
+    @subscribeInvoiceProcessingOptions = value
+  end
+
+  def initialize(generateInvoice = nil, processPayments = nil, subscribeInvoiceProcessingOptions = nil)
+    @generateInvoice = generateInvoice
+    @processPayments = processPayments
+    @subscribeInvoiceProcessingOptions = subscribeInvoiceProcessingOptions
   end
 end
 
-# {http://api.zuora.com/}SubscribeOptions
-#   generateInvoice - SOAP::SOAPBoolean
-#   processPayments - SOAP::SOAPBoolean
-class SubscribeOptions
-  attr_accessor :generateInvoice
-  attr_accessor :processPayments
+# {http://api.zuora.com/}SubscribeInvoiceProcessingOptions
+class SubscribeInvoiceProcessingOptions
+  @@schema_type = "SubscribeInvoiceProcessingOptions"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["invoiceProcessingScope", ["SOAP::SOAPString", XSD::QName.new("http://api.zuora.com/", "InvoiceProcessingScope")]]]
 
-  def initialize(generateInvoice = nil, processPayments = nil)
-    @generateInvoice = generateInvoice
-    @processPayments = processPayments
+  def InvoiceProcessingScope
+    @invoiceProcessingScope
+  end
+
+  def InvoiceProcessingScope=(value)
+    @invoiceProcessingScope = value
+  end
+
+  def initialize(invoiceProcessingScope = nil)
+    @invoiceProcessingScope = invoiceProcessingScope
   end
 end
 
 # {http://api.zuora.com/}SubscriptionData
-#   subscription - ZUORA::Subscription
-#   ratePlanData - ZUORA::RatePlanData
 class SubscriptionData
-  attr_accessor :subscription
-  attr_accessor :ratePlanData
+  @@schema_type = "SubscriptionData"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["subscription", ["Subscription", XSD::QName.new("http://api.zuora.com/", "Subscription")]], ["ratePlanData", ["RatePlanData[]", XSD::QName.new("http://api.zuora.com/", "RatePlanData")]]]
+
+  def Subscription
+    @subscription
+  end
+
+  def Subscription=(value)
+    @subscription = value
+  end
+
+  def RatePlanData
+    @ratePlanData
+  end
+
+  def RatePlanData=(value)
+    @ratePlanData = value
+  end
 
   def initialize(subscription = nil, ratePlanData = [])
     @subscription = subscription
@@ -879,45 +1132,240 @@ class SubscriptionData
 end
 
 # {http://api.zuora.com/}RatePlanData
-#   ratePlan - ZUORA::RatePlan
-#   ratePlanCharge - ZUORA::RatePlanCharge
 class RatePlanData
-  attr_accessor :ratePlan
-  attr_accessor :ratePlanCharge
+  @@schema_type = "RatePlanData"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["ratePlan", ["RatePlan", XSD::QName.new("http://api.zuora.com/", "RatePlan")]], ["ratePlanChargeData", ["RatePlanChargeData[]", XSD::QName.new("http://api.zuora.com/", "RatePlanChargeData")]]]
 
-  def initialize(ratePlan = nil, ratePlanCharge = [])
+  def RatePlan
+    @ratePlan
+  end
+
+  def RatePlan=(value)
+    @ratePlan = value
+  end
+
+  def RatePlanChargeData
+    @ratePlanChargeData
+  end
+
+  def RatePlanChargeData=(value)
+    @ratePlanChargeData = value
+  end
+
+  def initialize(ratePlan = nil, ratePlanChargeData = [])
     @ratePlan = ratePlan
+    @ratePlanChargeData = ratePlanChargeData
+  end
+end
+
+# {http://api.zuora.com/}RatePlanChargeData
+class RatePlanChargeData
+  @@schema_type = "RatePlanChargeData"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["ratePlanCharge", ["RatePlanCharge", XSD::QName.new("http://api.zuora.com/", "RatePlanCharge")]], ["ratePlanChargeTier", ["RatePlanChargeTier[]", XSD::QName.new("http://api.zuora.com/", "RatePlanChargeTier")]]]
+
+  def RatePlanCharge
+    @ratePlanCharge
+  end
+
+  def RatePlanCharge=(value)
+    @ratePlanCharge = value
+  end
+
+  def RatePlanChargeTier
+    @ratePlanChargeTier
+  end
+
+  def RatePlanChargeTier=(value)
+    @ratePlanChargeTier = value
+  end
+
+  def initialize(ratePlanCharge = nil, ratePlanChargeTier = [])
     @ratePlanCharge = ratePlanCharge
+    @ratePlanChargeTier = ratePlanChargeTier
+  end
+end
+
+# {http://api.zuora.com/}ProductRatePlanChargeTierData
+class ProductRatePlanChargeTierData < ::Array
+  @@schema_type = "ProductRatePlanChargeTier"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = [["ProductRatePlanChargeTier", ["ProductRatePlanChargeTier[]", XSD::QName.new("http://api.zuora.com/", "ProductRatePlanChargeTier")]]]
+end
+
+# {http://api.zuora.com/}GatewayOptionData
+class GatewayOptionData < ::Array
+  @@schema_type = "GatewayOption"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = [["GatewayOption", ["GatewayOption[]", XSD::QName.new("http://api.zuora.com/", "GatewayOption")]]]
+end
+
+# {http://api.zuora.com/}InvoiceData
+class InvoiceData
+  @@schema_type = "InvoiceData"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["invoice", ["Invoice", XSD::QName.new("http://api.zuora.com/", "Invoice")]], ["invoiceItem", ["InvoiceItem[]", XSD::QName.new("http://api.zuora.com/", "InvoiceItem")]]]
+
+  def Invoice
+    @invoice
+  end
+
+  def Invoice=(value)
+    @invoice = value
+  end
+
+  def InvoiceItem
+    @invoiceItem
+  end
+
+  def InvoiceItem=(value)
+    @invoiceItem = value
+  end
+
+  def initialize(invoice = nil, invoiceItem = [])
+    @invoice = invoice
+    @invoiceItem = invoiceItem
+  end
+end
+
+# {http://api.zuora.com/}InvoiceResult
+class InvoiceResult < ::Array
+  @@schema_type = "Invoice"
+  @@schema_ns = "http://object.api.zuora.com/"
+  @@schema_element = [["Invoice", ["Invoice[]", XSD::QName.new("http://api.zuora.com/", "Invoice")]]]
+end
+
+# {http://api.zuora.com/}PreviewOptions
+class PreviewOptions
+  @@schema_type = "PreviewOptions"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["enablePreviewMode", ["Boolean", XSD::QName.new("http://api.zuora.com/", "EnablePreviewMode")]], ["numberOfPeriods", ["Int", XSD::QName.new("http://api.zuora.com/", "NumberOfPeriods")]]]
+
+  def EnablePreviewMode
+    @enablePreviewMode
+  end
+
+  def EnablePreviewMode=(value)
+    @enablePreviewMode = value
+  end
+
+  def NumberOfPeriods
+    @numberOfPeriods
+  end
+
+  def NumberOfPeriods=(value)
+    @numberOfPeriods = value
+  end
+
+  def initialize(enablePreviewMode = nil, numberOfPeriods = nil)
+    @enablePreviewMode = enablePreviewMode
+    @numberOfPeriods = numberOfPeriods
   end
 end
 
 # {http://api.zuora.com/}SubscribeResult
-#   accountId - (any)
-#   accountNumber - SOAP::SOAPString
-#   errors - ZUORA::Error
-#   invoiceId - (any)
-#   invoiceNumber - SOAP::SOAPString
-#   paymentTransactionNumber - SOAP::SOAPString
-#   subscriptionId - (any)
-#   subscriptionNumber - SOAP::SOAPString
-#   success - SOAP::SOAPBoolean
 class SubscribeResult
-  attr_accessor :accountId
-  attr_accessor :accountNumber
-  attr_accessor :errors
-  attr_accessor :invoiceId
-  attr_accessor :invoiceNumber
-  attr_accessor :paymentTransactionNumber
-  attr_accessor :subscriptionId
-  attr_accessor :subscriptionNumber
-  attr_accessor :success
+  @@schema_type = "SubscribeResult"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["accountId", ["SOAP::SOAPString", XSD::QName.new("http://api.zuora.com/", "AccountId")]], ["accountNumber", ["String", XSD::QName.new("http://api.zuora.com/", "AccountNumber")]], ["errors", ["Error[]", XSD::QName.new("http://api.zuora.com/", "Errors")]], ["invoiceData", ["InvoiceData[]", XSD::QName.new("http://api.zuora.com/", "InvoiceData")]], ["invoiceId", ["SOAP::SOAPString", XSD::QName.new("http://api.zuora.com/", "InvoiceId")]], ["invoiceNumber", ["String", XSD::QName.new("http://api.zuora.com/", "InvoiceNumber")]], ["invoiceResult", ["InvoiceResult", XSD::QName.new("http://api.zuora.com/", "InvoiceResult")]], ["paymentTransactionNumber", ["String", XSD::QName.new("http://api.zuora.com/", "PaymentTransactionNumber")]], ["subscriptionId", ["SOAP::SOAPString", XSD::QName.new("http://api.zuora.com/", "SubscriptionId")]], ["subscriptionNumber", ["String", XSD::QName.new("http://api.zuora.com/", "SubscriptionNumber")]], ["success", ["Boolean", XSD::QName.new("http://api.zuora.com/", "Success")]]]
 
-  def initialize(accountId = nil, accountNumber = nil, errors = [], invoiceId = nil, invoiceNumber = nil, paymentTransactionNumber = nil, subscriptionId = nil, subscriptionNumber = nil, success = nil)
+  def AccountId
+    @accountId
+  end
+
+  def AccountId=(value)
+    @accountId = value
+  end
+
+  def AccountNumber
+    @accountNumber
+  end
+
+  def AccountNumber=(value)
+    @accountNumber = value
+  end
+
+  def Errors
+    @errors
+  end
+
+  def Errors=(value)
+    @errors = value
+  end
+
+  def InvoiceData
+    @invoiceData
+  end
+
+  def InvoiceData=(value)
+    @invoiceData = value
+  end
+
+  def InvoiceId
+    @invoiceId
+  end
+
+  def InvoiceId=(value)
+    @invoiceId = value
+  end
+
+  def InvoiceNumber
+    @invoiceNumber
+  end
+
+  def InvoiceNumber=(value)
+    @invoiceNumber = value
+  end
+
+  def InvoiceResult
+    @invoiceResult
+  end
+
+  def InvoiceResult=(value)
+    @invoiceResult = value
+  end
+
+  def PaymentTransactionNumber
+    @paymentTransactionNumber
+  end
+
+  def PaymentTransactionNumber=(value)
+    @paymentTransactionNumber = value
+  end
+
+  def SubscriptionId
+    @subscriptionId
+  end
+
+  def SubscriptionId=(value)
+    @subscriptionId = value
+  end
+
+  def SubscriptionNumber
+    @subscriptionNumber
+  end
+
+  def SubscriptionNumber=(value)
+    @subscriptionNumber = value
+  end
+
+  def Success
+    @success
+  end
+
+  def Success=(value)
+    @success = value
+  end
+
+  def initialize(accountId = nil, accountNumber = nil, errors = [], invoiceData = [], invoiceId = nil, invoiceNumber = nil, invoiceResult = nil, paymentTransactionNumber = nil, subscriptionId = nil, subscriptionNumber = nil, success = nil)
     @accountId = accountId
     @accountNumber = accountNumber
     @errors = errors
+    @invoiceData = invoiceData
     @invoiceId = invoiceId
     @invoiceNumber = invoiceNumber
+    @invoiceResult = invoiceResult
     @paymentTransactionNumber = paymentTransactionNumber
     @subscriptionId = subscriptionId
     @subscriptionNumber = subscriptionNumber
@@ -926,13 +1374,34 @@ class SubscribeResult
 end
 
 # {http://api.zuora.com/}SaveResult
-#   errors - ZUORA::Error
-#   id - (any)
-#   success - SOAP::SOAPBoolean
 class SaveResult
-  attr_accessor :errors
-  attr_accessor :id
-  attr_accessor :success
+  @@schema_type = "SaveResult"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["errors", ["Error[]", XSD::QName.new("http://api.zuora.com/", "Errors")]], ["id", ["SOAP::SOAPString", XSD::QName.new("http://api.zuora.com/", "Id")]], ["success", ["Boolean", XSD::QName.new("http://api.zuora.com/", "Success")]]]
+
+  def Errors
+    @errors
+  end
+
+  def Errors=(value)
+    @errors = value
+  end
+
+  def Id
+    @id
+  end
+
+  def Id=(value)
+    @id = value
+  end
+
+  def Success
+    @success
+  end
+
+  def Success=(value)
+    @success = value
+  end
 
   def initialize(errors = [], id = nil, success = nil)
     @errors = errors
@@ -942,10 +1411,11 @@ class SaveResult
 end
 
 # {http://api.zuora.com/}DeleteResult
-#   errors - ZUORA::Error
-#   id - (any)
-#   success - SOAP::SOAPBoolean
 class DeleteResult
+  @@schema_type = "DeleteResult"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["errors", "Error[]"], ["id", "SOAP::SOAPString"], ["success", "Boolean"]]
+
   attr_accessor :errors
   attr_accessor :id
   attr_accessor :success
@@ -957,12 +1427,49 @@ class DeleteResult
   end
 end
 
+# {http://api.zuora.com/}ExecuteResult
+class ExecuteResult
+  @@schema_type = "ExecuteResult"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["errors", ["Error[]", XSD::QName.new("http://api.zuora.com/", "Errors")]], ["id", ["SOAP::SOAPString", XSD::QName.new("http://api.zuora.com/", "Id")]], ["success", ["Boolean", XSD::QName.new("http://api.zuora.com/", "Success")]]]
+
+  def Errors
+    @errors
+  end
+
+  def Errors=(value)
+    @errors = value
+  end
+
+  def Id
+    @id
+  end
+
+  def Id=(value)
+    @id = value
+  end
+
+  def Success
+    @success
+  end
+
+  def Success=(value)
+    @success = value
+  end
+
+  def initialize(errors = [], id = nil, success = nil)
+    @errors = errors
+    @id = id
+    @success = success
+  end
+end
+
 # {http://api.zuora.com/}QueryResult
-#   done - SOAP::SOAPBoolean
-#   queryLocator - (any)
-#   records - ZUORA::ZObject
-#   size - SOAP::SOAPInt
 class QueryResult
+  @@schema_type = "QueryResult"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["done", "SOAP::SOAPBoolean"], ["queryLocator", "SOAP::SOAPString"], ["records", "ZObject[]"], ["size", "SOAP::SOAPInt"]]
+
   attr_accessor :done
   attr_accessor :queryLocator
   attr_accessor :records
@@ -977,13 +1484,34 @@ class QueryResult
 end
 
 # {http://api.zuora.com/}Error
-#   code - ZUORA::ErrorCode
-#   message - SOAP::SOAPString
-#   field - SOAP::SOAPString
 class Error
-  attr_accessor :code
-  attr_accessor :message
-  attr_accessor :field
+  @@schema_type = "Error"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["code", ["SOAP::SOAPString", XSD::QName.new("http://api.zuora.com/", "Code")]], ["message", ["String", XSD::QName.new("http://api.zuora.com/", "Message")]], ["field", ["String", XSD::QName.new("http://api.zuora.com/", "Field")]]]
+
+  def Code
+    @code
+  end
+
+  def Code=(value)
+    @code = value
+  end
+
+  def Message
+    @message
+  end
+
+  def Message=(value)
+    @message = value
+  end
+
+  def Field
+    @field
+  end
+
+  def Field=(value)
+    @field = value
+  end
 
   def initialize(code = nil, message = nil, field = nil)
     @code = code
@@ -992,12 +1520,184 @@ class Error
   end
 end
 
+# {http://api.zuora.com/}InvoiceProcessingOptions
+class InvoiceProcessingOptions
+  @@schema_type = "InvoiceProcessingOptions"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["invoiceTargetDate", ["DateTime", XSD::QName.new("http://api.zuora.com/", "InvoiceTargetDate")]]]
+
+  def InvoiceTargetDate
+    @invoiceTargetDate
+  end
+
+  def InvoiceTargetDate=(value)
+    @invoiceTargetDate = value
+  end
+
+  def initialize(invoiceTargetDate = nil)
+    @invoiceTargetDate = invoiceTargetDate
+  end
+end
+
+# {http://api.zuora.com/}AmendOptions
+class AmendOptions
+  @@schema_type = "AmendOptions"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["generateInvoice", ["SOAP::SOAPBoolean", XSD::QName.new("http://api.zuora.com/", "GenerateInvoice")]], ["invoiceProcessingOptions", ["InvoiceProcessingOptions", XSD::QName.new("http://api.zuora.com/", "InvoiceProcessingOptions")]], ["processPayments", ["SOAP::SOAPBoolean", XSD::QName.new("http://api.zuora.com/", "ProcessPayments")]]]
+
+  def GenerateInvoice
+    @generateInvoice
+  end
+
+  def GenerateInvoice=(value)
+    @generateInvoice = value
+  end
+
+  def InvoiceProcessingOptions
+    @invoiceProcessingOptions
+  end
+
+  def InvoiceProcessingOptions=(value)
+    @invoiceProcessingOptions = value
+  end
+
+  def ProcessPayments
+    @processPayments
+  end
+
+  def ProcessPayments=(value)
+    @processPayments = value
+  end
+
+  def initialize(generateInvoice = nil, invoiceProcessingOptions = nil, processPayments = nil)
+    @generateInvoice = generateInvoice
+    @invoiceProcessingOptions = invoiceProcessingOptions
+    @processPayments = processPayments
+  end
+end
+
+# {http://api.zuora.com/}AmendRequest
+class AmendRequest
+  @@schema_type = "AmendRequest"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["amendments", ["Amendment[]", XSD::QName.new("http://api.zuora.com/", "Amendments")]], ["amendOptions", ["AmendOptions", XSD::QName.new("http://api.zuora.com/", "AmendOptions")]], ["previewOptions", ["PreviewOptions", XSD::QName.new("http://api.zuora.com/", "PreviewOptions")]]]
+
+  def Amendments
+    @amendments
+  end
+
+  def Amendments=(value)
+    @amendments = value
+  end
+
+  def AmendOptions
+    @amendOptions
+  end
+
+  def AmendOptions=(value)
+    @amendOptions = value
+  end
+
+  def PreviewOptions
+    @previewOptions
+  end
+
+  def PreviewOptions=(value)
+    @previewOptions = value
+  end
+
+  def initialize(amendments = [], amendOptions = nil, previewOptions = nil)
+    @amendments = amendments
+    @amendOptions = amendOptions
+    @previewOptions = previewOptions
+  end
+end
+
+# {http://api.zuora.com/}AmendResult
+class AmendResult
+  @@schema_type = "AmendResult"
+  @@schema_ns = "http://api.zuora.com/"
+  @@schema_element = [["amendmentIds", ["SOAP::SOAPString[]", XSD::QName.new("http://api.zuora.com/", "AmendmentIds")]], ["errors", ["Error[]", XSD::QName.new("http://api.zuora.com/", "Errors")]], ["invoiceDatas", ["InvoiceData[]", XSD::QName.new("http://api.zuora.com/", "InvoiceDatas")]], ["invoiceId", ["SOAP::SOAPString", XSD::QName.new("http://api.zuora.com/", "InvoiceId")]], ["paymentTransactionNumber", ["String", XSD::QName.new("http://api.zuora.com/", "PaymentTransactionNumber")]], ["success", ["Boolean", XSD::QName.new("http://api.zuora.com/", "Success")]]]
+
+  def AmendmentIds
+    @amendmentIds
+  end
+
+  def AmendmentIds=(value)
+    @amendmentIds = value
+  end
+
+  def Errors
+    @errors
+  end
+
+  def Errors=(value)
+    @errors = value
+  end
+
+  def InvoiceDatas
+    @invoiceDatas
+  end
+
+  def InvoiceDatas=(value)
+    @invoiceDatas = value
+  end
+
+  def InvoiceId
+    @invoiceId
+  end
+
+  def InvoiceId=(value)
+    @invoiceId = value
+  end
+
+  def PaymentTransactionNumber
+    @paymentTransactionNumber
+  end
+
+  def PaymentTransactionNumber=(value)
+    @paymentTransactionNumber = value
+  end
+
+  def Success
+    @success
+  end
+
+  def Success=(value)
+    @success = value
+  end
+
+  def initialize(amendmentIds = [], errors = [], invoiceDatas = [], invoiceId = nil, paymentTransactionNumber = nil, success = nil)
+    @amendmentIds = amendmentIds
+    @errors = errors
+    @invoiceDatas = invoiceDatas
+    @invoiceId = invoiceId
+    @paymentTransactionNumber = paymentTransactionNumber
+    @success = success
+  end
+end
+
 # {http://fault.api.zuora.com/}ApiFault
-#   faultCode - ZUORA::ErrorCode
-#   faultMessage - SOAP::SOAPString
 class ApiFault
-  attr_accessor :faultCode
-  attr_accessor :faultMessage
+  @@schema_type = "ApiFault"
+  @@schema_ns = "http://fault.api.zuora.com/"
+  @@schema_element = [["faultCode", ["SOAP::SOAPString", XSD::QName.new("http://fault.api.zuora.com/", "FaultCode")]], ["faultMessage", ["String", XSD::QName.new("http://fault.api.zuora.com/", "FaultMessage")]]]
+
+  def FaultCode
+    @faultCode
+  end
+
+  def FaultCode=(value)
+    @faultCode = value
+  end
+
+  def FaultMessage
+    @faultMessage
+  end
+
+  def FaultMessage=(value)
+    @faultMessage = value
+  end
 
   def initialize(faultCode = nil, faultMessage = nil)
     @faultCode = faultCode
@@ -1006,258 +1706,88 @@ class ApiFault
 end
 
 # {http://fault.api.zuora.com/}LoginFault
-#   faultCode - ZUORA::ErrorCode
-#   faultMessage - SOAP::SOAPString
-class LoginFault < ::StandardError
-  attr_accessor :faultCode
-  attr_accessor :faultMessage
+class LoginFault
+  @@schema_type = "LoginFault"
+  @@schema_ns = "http://fault.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(faultCode = nil, faultMessage = nil)
-    @faultCode = faultCode
-    @faultMessage = faultMessage
+  def initialize
   end
 end
 
 # {http://fault.api.zuora.com/}InvalidTypeFault
-#   faultCode - ZUORA::ErrorCode
-#   faultMessage - SOAP::SOAPString
-class InvalidTypeFault < ::StandardError
-  attr_accessor :faultCode
-  attr_accessor :faultMessage
+class InvalidTypeFault
+  @@schema_type = "InvalidTypeFault"
+  @@schema_ns = "http://fault.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(faultCode = nil, faultMessage = nil)
-    @faultCode = faultCode
-    @faultMessage = faultMessage
+  def initialize
   end
 end
 
 # {http://fault.api.zuora.com/}InvalidValueFault
-#   faultCode - ZUORA::ErrorCode
-#   faultMessage - SOAP::SOAPString
-class InvalidValueFault < ::StandardError
-  attr_accessor :faultCode
-  attr_accessor :faultMessage
+class InvalidValueFault
+  @@schema_type = "InvalidValueFault"
+  @@schema_ns = "http://fault.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(faultCode = nil, faultMessage = nil)
-    @faultCode = faultCode
-    @faultMessage = faultMessage
+  def initialize
   end
 end
 
 # {http://fault.api.zuora.com/}MalformedQueryFault
-#   faultCode - ZUORA::ErrorCode
-#   faultMessage - SOAP::SOAPString
-class MalformedQueryFault < ::StandardError
-  attr_accessor :faultCode
-  attr_accessor :faultMessage
+class MalformedQueryFault
+  @@schema_type = "MalformedQueryFault"
+  @@schema_ns = "http://fault.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(faultCode = nil, faultMessage = nil)
-    @faultCode = faultCode
-    @faultMessage = faultMessage
+  def initialize
   end
 end
 
 # {http://fault.api.zuora.com/}InvalidQueryLocatorFault
-#   faultCode - ZUORA::ErrorCode
-#   faultMessage - SOAP::SOAPString
-class InvalidQueryLocatorFault < ::StandardError
-  attr_accessor :faultCode
-  attr_accessor :faultMessage
+class InvalidQueryLocatorFault
+  @@schema_type = "InvalidQueryLocatorFault"
+  @@schema_ns = "http://fault.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(faultCode = nil, faultMessage = nil)
-    @faultCode = faultCode
-    @faultMessage = faultMessage
+  def initialize
   end
 end
 
 # {http://fault.api.zuora.com/}UnexpectedErrorFault
-#   faultCode - ZUORA::ErrorCode
-#   faultMessage - SOAP::SOAPString
-class UnexpectedErrorFault < ::StandardError
-  attr_accessor :faultCode
-  attr_accessor :faultMessage
+class UnexpectedErrorFault
+  @@schema_type = "UnexpectedErrorFault"
+  @@schema_ns = "http://fault.api.zuora.com/"
+  @@schema_element = []
 
-  def initialize(faultCode = nil, faultMessage = nil)
-    @faultCode = faultCode
-    @faultMessage = faultMessage
+  def initialize
   end
 end
 
 # {http://api.zuora.com/}ErrorCode
-class ErrorCode < ::String
-  API_DISABLED = ErrorCode.new("API_DISABLED")
-  CANNOT_DELETE = ErrorCode.new("CANNOT_DELETE")
-  CREDIT_CARD_PROCESSING_FAILURE = ErrorCode.new("CREDIT_CARD_PROCESSING_FAILURE")
-  DUPLICATE_VALUE = ErrorCode.new("DUPLICATE_VALUE")
-  INVALID_FIELD = ErrorCode.new("INVALID_FIELD")
-  INVALID_ID = ErrorCode.new("INVALID_ID")
-  INVALID_LOGIN = ErrorCode.new("INVALID_LOGIN")
-  INVALID_SESSION = ErrorCode.new("INVALID_SESSION")
-  INVALID_TYPE = ErrorCode.new("INVALID_TYPE")
-  INVALID_VALUE = ErrorCode.new("INVALID_VALUE")
-  INVALID_VERSION = ErrorCode.new("INVALID_VERSION")
-  MALFORMED_QUERY = ErrorCode.new("MALFORMED_QUERY")
-  MAX_RECORDS_EXCEEDED = ErrorCode.new("MAX_RECORDS_EXCEEDED")
-  MISSING_REQUIRED_VALUE = ErrorCode.new("MISSING_REQUIRED_VALUE")
-  TRANSACTION_FAILED = ErrorCode.new("TRANSACTION_FAILED")
-  UNKNOWN_ERROR = ErrorCode.new("UNKNOWN_ERROR")
+module ErrorCode
+  ACCOUNTING_PERIOD_CLOSED = "ACCOUNTING_PERIOD_CLOSED"
+  API_DISABLED = "API_DISABLED"
+  BATCH_FAIL_ERROR = "BATCH_FAIL_ERROR"
+  CANNOT_DELETE = "CANNOT_DELETE"
+  CREDIT_CARD_PROCESSING_FAILURE = "CREDIT_CARD_PROCESSING_FAILURE"
+  DUPLICATE_VALUE = "DUPLICATE_VALUE"
+  INVALID_FIELD = "INVALID_FIELD"
+  INVALID_ID = "INVALID_ID"
+  INVALID_LOGIN = "INVALID_LOGIN"
+  INVALID_SESSION = "INVALID_SESSION"
+  INVALID_TEMPLATE = "INVALID_TEMPLATE"
+  INVALID_TYPE = "INVALID_TYPE"
+  INVALID_VALUE = "INVALID_VALUE"
+  INVALID_VERSION = "INVALID_VERSION"
+  MALFORMED_QUERY = "MALFORMED_QUERY"
+  MAX_RECORDS_EXCEEDED = "MAX_RECORDS_EXCEEDED"
+  MISSING_REQUIRED_VALUE = "MISSING_REQUIRED_VALUE"
+  NO_PERMISSION = "NO_PERMISSION"
+  SERVER_UNAVAILABLE = "SERVER_UNAVAILABLE"
+  TRANSACTION_FAILED = "TRANSACTION_FAILED"
+  UNKNOWN_ERROR = "UNKNOWN_ERROR"
 end
-
-# {http://api.zuora.com/}login
-#   username - SOAP::SOAPString
-#   password - SOAP::SOAPString
-class Login
-  attr_accessor :username
-  attr_accessor :password
-
-  def initialize(username = nil, password = nil)
-    @username = username
-    @password = password
-  end
-end
-
-# {http://api.zuora.com/}loginResponse
-#   result - ZUORA::LoginResult
-class LoginResponse
-  attr_accessor :result
-
-  def initialize(result = nil)
-    @result = result
-  end
-end
-
-# {http://api.zuora.com/}subscribe
-class Subscribe < ::Array
-end
-
-# {http://api.zuora.com/}subscribeWithExistingAccount
-class SubscribeWithExistingAccount < ::Array
-end
-
-# {http://api.zuora.com/}subscribeResponse
-class SubscribeResponse < ::Array
-end
-
-# {http://api.zuora.com/}create
-class Create < ::Array
-end
-
-# {http://api.zuora.com/}createResponse
-class CreateResponse < ::Array
-end
-
-# {http://api.zuora.com/}update
-class Update < ::Array
-end
-
-# {http://api.zuora.com/}updateResponse
-class UpdateResponse < ::Array
-end
-
-# {http://api.zuora.com/}delete
-#   type - SOAP::SOAPString
-#   ids - (any)
-class Delete
-  attr_accessor :type
-  attr_accessor :ids
-
-  def initialize(type = nil, ids = [])
-    @type = type
-    @ids = ids
-  end
-end
-
-# {http://api.zuora.com/}deleteResponse
-class DeleteResponse < ::Array
-end
-
-# {http://api.zuora.com/}query
-#   queryString - SOAP::SOAPString
-class Query
-  attr_accessor :queryString
-
-  def initialize(queryString = nil)
-    @queryString = queryString
-  end
-end
-
-# {http://api.zuora.com/}queryResponse
-#   result - ZUORA::QueryResult
-class QueryResponse
-  attr_accessor :result
-
-  def initialize(result = nil)
-    @result = result
-  end
-end
-
-# {http://api.zuora.com/}SessionHeader
-#   session - SOAP::SOAPString
-class SessionHeader
-  attr_accessor :session
-
-  def initialize(session = nil)
-    @session = session
-  end
-  
-  def on_outbound_headeritem(test)
-    sobj = SOAP::SOAPElement.new(XSD::QName.new("ns1", 'SessionHeader'))
-    sobj.add(SOAP::SOAPElement.new(XSD::QName.new("ns1", "session"), @session))
-    ::SOAP::SOAPHeaderItem.new(sobj, false)
-  end
-end
-
-# {http://api.zuora.com/}DummyHeader
-#   account - ZUORA::Account
-#   amendment - ZUORA::Amendment
-#   invoice - ZUORA::Invoice
-#   payment - ZUORA::Payment
-#   invoicePayment - ZUORA::InvoicePayment
-#   product - ZUORA::Product
-#   productRatePlan - ZUORA::ProductRatePlan
-#   productRatePlanCharge - ZUORA::ProductRatePlanCharge
-#   productRatePlanChargeTier - ZUORA::ProductRatePlanChargeTier
-#   ratePlan - ZUORA::RatePlan
-#   ratePlanCharge - ZUORA::RatePlanCharge
-#   ratePlanChargeTier - ZUORA::RatePlanChargeTier
-#   usage - ZUORA::Usage
-class DummyHeader
-  attr_accessor :account
-  attr_accessor :amendment
-  attr_accessor :invoice
-  attr_accessor :payment
-  attr_accessor :invoicePayment
-  attr_accessor :product
-  attr_accessor :productRatePlan
-  attr_accessor :productRatePlanCharge
-  attr_accessor :productRatePlanChargeTier
-  attr_accessor :ratePlan
-  attr_accessor :ratePlanCharge
-  attr_accessor :ratePlanChargeTier
-  attr_accessor :usage
-  attr_reader :__xmlele_any
-
-  def set_any(elements)
-    @__xmlele_any = elements
-  end
-
-  def initialize(account = nil, amendment = nil, invoice = nil, payment = nil, invoicePayment = nil, product = nil, productRatePlan = nil, productRatePlanCharge = nil, productRatePlanChargeTier = nil, ratePlan = nil, ratePlanCharge = nil, ratePlanChargeTier = nil, usage = nil)
-    @account = account
-    @amendment = amendment
-    @invoice = invoice
-    @payment = payment
-    @invoicePayment = invoicePayment
-    @product = product
-    @productRatePlan = productRatePlan
-    @productRatePlanCharge = productRatePlanCharge
-    @productRatePlanChargeTier = productRatePlanChargeTier
-    @ratePlan = ratePlan
-    @ratePlanCharge = ratePlanCharge
-    @ratePlanChargeTier = ratePlanChargeTier
-    @usage = usage
-    @__xmlele_any = nil
-  end
-end
-
 
 end
