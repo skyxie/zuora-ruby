@@ -18,6 +18,9 @@ end
 module Zuora
   module Ruby
 
+    DATE_TIME_FORMAT = "%Y-%m-%dT%T.000%z"
+    DATE_FORMAT = "%Y-%m-%dT%T"
+
     # This module describes the basic skeleton for a Zuora model
     module Model
 
@@ -35,9 +38,24 @@ module Zuora
         Api.query(str)
       end
 
+      def translate_type(key, val)
+        case key
+        when /^(Subscription|Term|Effective)(Start|End)Date$/
+          Date.strptime(val, DATE_FORMAT)
+        when /^(Created|Updated|ContractAcceptance|ContractEffective|ServiceActivation)Date$/
+          DateTime.strptime(val, DATE_TIME_FORMAT)
+        else
+          val
+        end
+      end
+
       # Parses the result from a query response into a Hash
       def parse_response(response)
-        response.result.records.map{ |r| fields.inject({}){ |hsh, f| hsh.merge(f => r[f]) } }
+        response.result.records.map do |r|
+          fields.inject({}) do |hsh, f|
+            hsh.merge(f => translate_type(f, r[f]))
+          end
+        end
       end
 
       def all
@@ -53,9 +71,11 @@ module Zuora
       end
     end
 
+    # Module for models with an effective start and end date (i.e. an effective range)
+    # Adds methods to search for records within an effective range
     module EffectiveRange
       def effective_at(time)
-        str = time.strftime("%Y-%m-%dT%T%z")
+        str = time.strftime(DATE_TIME_FORMAT)
         parse_response(query("EffectiveStartDate < '#{str}' and EffectiveEndDate > '#{str}'"))
       end
 
@@ -69,19 +89,19 @@ module Zuora
       "Product"               => %w{Id Name SKU Category Description EffectiveStartDate EffectiveEndDate},
       "ProductRatePlan"       => %w{CreatedById CreatedDate Description EffectiveEndDate EffectiveStartDate 
                                     Id Name ProductId UpdatedById UpdatedDate},
-      "ProductRatePlanCharge" => %w{AccountingCode ApplyDiscountTo BillCycleDay BillCycleType BillingPeriod
+      "ProductRatePlanCharge" => %w{AccountingCode BillCycleDay BillCycleType BillingPeriod
                                     BillingPeriodAlignment ChargeModel ChargeType CreatedById CreatedDate
-                                    DefaultQuantity Description DiscountLevel Id IncludedUnits MaxQuantity
-                                    MinQuantity Model Name NumberOfPeriod OverageCalculationOption OverageUnusedUnitsCreditOption
+                                    DefaultQuantity Description Id IncludedUnits MaxQuantity
+                                    MinQuantity Name NumberOfPeriod OverageCalculationOption OverageUnusedUnitsCreditOption
                                     PriceIncreaseOption PriceIncreasePercentage ProductRatePlanId RevRecCode
                                     RevRecTriggerCondition SmoothingModel SpecificBillingPeriod Taxable TaxCode
-                                    TriggerEvent Type UOM UpToPeriods UpdatedById UpdatedDate UseDiscountSpecificAccountingCode},
-      "Subscription"          => %w{AccountId AncestorAccountId AutoRenew CacelledDate ContractAcceptanceDate
+                                    TriggerEvent UOM UpdatedById UpdatedDate UseDiscountSpecificAccountingCode},
+      "Subscription"          => %w{AccountId AutoRenew CancelledDate ContractAcceptanceDate
                                     ContractEffectiveDate CreatedById CreatedDate CreatorAccountId
-                                    CreatorInvoiceOwnerId Id InitialTerm InvoiceOwnerId InvoiceSeparate Name 
+                                    CreatorInvoiceOwnerId Id InitialTerm InvoiceOwnerId IsInvoiceSeparate Name 
                                     Notes OriginalCreatedDate OriginalId PreviousSubscriptionId RenewalTerm 
                                     ServiceActivationDate Status SubscriptionEndDate SubscriptionStartDate 
-                                    TermEndDate TermStartDate TermType UpdatedById UpdatedDate Version VersionCreatedDate},
+                                    TermEndDate TermStartDate TermType UpdatedById UpdatedDate Version},
       "RatePlan"              => %w{AmendmentId AmendmentSubscriptionRatePlanId AmendmentType CreatedById CreatedDate
                                     Name ProductRatePlanId SubscriptionId UpdatedById UpdatedDate}, 
       "RatePlanCharge"        => %w{AccountingCode ApplyDiscountTo BillCycleDay BillCycleType BillingPeriodAlignment
