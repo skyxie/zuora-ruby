@@ -51,10 +51,17 @@ module Zuora
 
       # Parses the result from a query response into a Hash
       def parse_response(response)
-        response.result.records.map do |r|
-          fields.inject({}) do |hsh, f|
-            hsh.merge(f => translate_type(f, r[f]))
-          end
+        if response.result.size.to_i > 1
+          response.result.records.map{ |r| to_hash(r) }
+        elsif response.result.size.to_i == 1
+          to_hash(response.result.records)
+        end
+      end
+
+      # Converts a soap object into a hash
+      def to_hash(soap_obj)
+        fields.inject({"Class" => self.name}) do |hsh, f|
+          hsh.merge(f => translate_type(f, soap_obj[f]))
         end
       end
 
@@ -68,6 +75,10 @@ module Zuora
 
       def find_by_id(id)
         find("Id = #{id}")
+      end
+
+      def find_by_name(name)
+        find("Name = #{name}")
       end
     end
 
@@ -86,6 +97,14 @@ module Zuora
 
     # Mapping of Zuora models to a list of fields in those models
     ModelFields = {
+      "Contact"               => %w{Id AccountId Address1 Address2 City Country County CreatedById CreatedDate
+                                    Description FirstName HomePhone LastName MobilePhone NickName OtherPhone
+                                    OtherPhoneType PersonalEmail PostalCode State TaxRegion UpdatedById UpdatedDate
+                                    WorkEmail WorkPhone},
+      "Account"               => %w{Id AccountNumber Balance AutoPay BillCycleDay BillToId CreatedById
+                                    CreatedDate CreditBalance Currency DefaultPaymentMethodId InvoiceTemplateId
+                                    LastInvoiceDate Name Notes ParentId PaymentGateway PaymentTerm 
+                                    PurchaseOrderNumber SoldToId Status TotalInvoiceBalance UpdatedById UpdatedDate},
       "Product"               => %w{Id Name SKU Category Description EffectiveStartDate EffectiveEndDate},
       "ProductRatePlan"       => %w{CreatedById CreatedDate Description EffectiveEndDate EffectiveStartDate 
                                     Id Name ProductId UpdatedById UpdatedDate},
@@ -96,12 +115,6 @@ module Zuora
                                     PriceIncreaseOption PriceIncreasePercentage ProductRatePlanId RevRecCode
                                     RevRecTriggerCondition SmoothingModel SpecificBillingPeriod Taxable TaxCode
                                     TriggerEvent UOM UpdatedById UpdatedDate UseDiscountSpecificAccountingCode},
-      "Subscription"          => %w{AccountId AutoRenew CancelledDate ContractAcceptanceDate
-                                    ContractEffectiveDate CreatedById CreatedDate CreatorAccountId
-                                    CreatorInvoiceOwnerId Id InitialTerm InvoiceOwnerId IsInvoiceSeparate Name 
-                                    Notes OriginalCreatedDate OriginalId PreviousSubscriptionId RenewalTerm 
-                                    ServiceActivationDate Status SubscriptionEndDate SubscriptionStartDate 
-                                    TermEndDate TermStartDate TermType UpdatedById UpdatedDate Version},
       "RatePlan"              => %w{AmendmentId AmendmentSubscriptionRatePlanId AmendmentType CreatedById CreatedDate
                                     Name ProductRatePlanId SubscriptionId UpdatedById UpdatedDate}, 
       "RatePlanCharge"        => %w{AccountingCode ApplyDiscountTo BillCycleDay BillCycleType BillingPeriodAlignment
@@ -111,7 +124,13 @@ module Zuora
                                     OverageUnusedUnitsCreditOption Price PriceIncreasePercentage ProcessedThroughDate
                                     ProductRatePlanChargeId Quantity RatePlanId Segment TCV
                                     TriggerDate TriggerEvent UnusedUnitsCreditRates UOM UpdatedById UpdatedDate UpToPeriods 
-                                    UsageRecordRatingOption UseDiscountSpecificAccountingCode Version}
+                                    UsageRecordRatingOption UseDiscountSpecificAccountingCode Version},
+      "Subscription"          => %w{AccountId AutoRenew CancelledDate ContractAcceptanceDate
+                                    ContractEffectiveDate CreatedById CreatedDate CreatorAccountId
+                                    CreatorInvoiceOwnerId Id InitialTerm InvoiceOwnerId IsInvoiceSeparate Name 
+                                    Notes OriginalCreatedDate OriginalId PreviousSubscriptionId RenewalTerm 
+                                    ServiceActivationDate Status SubscriptionEndDate SubscriptionStartDate 
+                                    TermEndDate TermStartDate TermType UpdatedById UpdatedDate Version}
     }
 
     # Dynamically define each zuora model
