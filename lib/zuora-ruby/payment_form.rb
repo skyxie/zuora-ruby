@@ -14,7 +14,7 @@ module Zuora
       # Combine the camel case standard of the Zuora API and and the underscore standard in Ruby
       alias :tenant_id :tenantId
 
-      def initialize(id, tenant_id, token, api_security_key, timestamp=Time.now.to_i)
+      def initialize(id, tenant_id, token, api_security_key, timestamp=(Time.now.to_f * 10**3).to_i)
         @id, @tenantId, @token, @api_security_key, @timestamp = [id, tenant_id, token, api_security_key, timestamp]
       end
 
