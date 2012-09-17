@@ -1,0 +1,24 @@
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec_helper'))
+
+describe Zuora::Ruby::PaymentForm do
+  describe "signature" do
+    before do
+      id = "4028e697325f8e970132603326446b33"
+      tenant_id = 10514
+      timestamp = 1316846058955
+      token = "7av18bEz97Jrq9K6z0QPyvJpIqIxSmZc"
+      api_security_key = "PEq1yiahIyFO6XxpyuCWyLoG4ym_HAklH2-FfAisLuk="
+
+      @form = Zuora::Ruby::PaymentForm.new(id, tenant_id, token, api_security_key, timestamp)
+    end
+
+    it "should match the example string" do
+      @form.params_str.should == "id=4028e697325f8e970132603326446b33&tenantId=10514&timestamp=1316846058955&token=7av18bEz97Jrq9K6z0QPyvJpIqIxSmZcPEq1yiahIyFO6XxpyuCWyLoG4ym_HAklH2-FfAisLuk="
+    end
+
+    it "should match the example signature" do
+      @form.signature.should == "ODU2ODMyZmY5YmFjNDQzZDQ4NmU2MDg3ODNkNzhlNTc="
+    end
+
+  end
+end
