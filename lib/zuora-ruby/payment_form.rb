@@ -9,7 +9,7 @@ module Zuora
 
       IFRAME_URL = "https://www.zuora.com/apps/PublicHostedPage.do"
 
-      attr_reader :id, :tenantId, :timestamp
+      attr_reader :id, :tenantId, :timestamp, :token
 
       # Combine the camel case standard of the Zuora API and and the underscore standard in Ruby
       alias :tenant_id :tenantId
@@ -18,22 +18,24 @@ module Zuora
         @id, @tenantId, @token, @api_security_key, @timestamp = [id, tenant_id, token, api_security_key, timestamp]
       end
 
-      def token
-        @token + @api_security_key
-      end
-
-      def params_str
-        %w{id tenantId timestamp token}.map do |attr|
-          "#{attr}=#{self.send(attr)}"
-        end.join("&")
+      def signature_params_str
+        params = %w{id tenantId timestamp}.map{ |attr| "#{attr}=#{self.send(attr)}"}
+        params << "token=#{@token + @api_security_key}"
+        params.join("&")
       end
 
       def signature
-        Base64.encode64(Digest::MD5.hexdigest(params_str)).chomp
+        Base64.encode64(Digest::MD5.hexdigest(signature_params_str)).chomp
+      end
+
+      def params_str
+        params = ["method=requestPage"]
+        params += %w{id tenantId timestamp token signature}.map{ |attr| "#{attr}=#{self.send(attr)}"}
+        params.join("&")
       end
 
       def iframe_url
-        "#{IFRAME_URL}?method=requestPage&#{params_str}&signature=#{signature}"
+        "#{IFRAME_URL}?#{params_str}"
       end
 
     end
