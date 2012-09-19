@@ -4,6 +4,7 @@ gem "soap4r"
 
 require 'zuora-ruby/model'
 require 'zuora-ruby/effective_range'
+require 'zuora-ruby/payment_form'
 
 require 'zuora-ruby/ZUORA'
 require 'zuora-ruby/ZUORADriver'
