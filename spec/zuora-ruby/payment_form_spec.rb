@@ -63,6 +63,22 @@ describe Zuora::Ruby::PaymentForm do
       end
     end
 
+    describe "token generator" do
+      it "will not reuse a fresh token" do
+        token = Zuora::Ruby::PaymentForm.create_token
+        new_token = "a" * 32
+        Zuora::Ruby::PaymentForm.expects(:random_token).twice.returns(token).then.returns(new_token)
+        Zuora::Ruby::PaymentForm.create_token.should == new_token
+      end
+
+      it "will reuse an old token" do
+        token = Zuora::Ruby::PaymentForm.create_token
+        Zuora::Ruby::PaymentForm.repository[token] = Time.now - 172900
+        Zuora::Ruby::PaymentForm.expects(:random_token).returns(token)
+        Zuora::Ruby::PaymentForm.create_token.should == token
+      end
+    end
+
     it "should translate from zuora time" do
       Zuora::Ruby::PaymentForm.from_zuora_time(@timestamp).to_f.should == @ruby_time.to_f
     end

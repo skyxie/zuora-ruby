@@ -41,18 +41,28 @@ module Zuora
       class << self
         attr_accessor :api_security_key, :tenant_id
 
-        # The repository stores a mapping of tokens to payment forms
+        # The repository stores a Hash mapping tokens to their 48 hour expiration
+        # A hash may not be the best datastructure to maintain this data since its kept in memory, but its used here
+        # to allow this library to work out of the box. 
+        # The repositiory can be set with another datastructure, the only requirement is that [] and []= are implemented.
         def repository
           @repository ||= Hash.new
         end
+        attr_writer :repository
 
         # Randomly generate a 32 character token that has not already been used
+        # After a token has been used, it cannot be used again for 48 hours
         def create_token
           begin
-            token = 32.times.map{ rand(36).to_s(36) }.join # 32 alphanumeric characters
-          end while repository[token] && repository[token] < Time.now
+            token = random_token
+          end while repository[token] && repository[token] > Time.now - 172800
           repository[token] = Time.now
           token
+        end
+
+        # Generates a random 32 character string
+        def random_token
+          32.times.map{ rand(36).to_s(36) }.join # 32 alphanumeric characters
         end
 
         # Primary interface to create a payment form
