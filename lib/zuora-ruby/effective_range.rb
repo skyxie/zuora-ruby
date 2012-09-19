@@ -6,7 +6,7 @@ module Zuora
     module EffectiveRange
       def effective_at(time)
         str = time.strftime(DATE_TIME_FORMAT)
-        parse_response(query("EffectiveStartDate < '#{str}' and EffectiveEndDate > '#{str}'"))
+        query("EffectiveStartDate < '#{str}' and EffectiveEndDate > '#{str}'")
       end
 
       def effective
