@@ -66,7 +66,7 @@ module Zuora
         end
 
         # Primary interface to create a payment form
-        def create_payment_form(id, timestamp = to_zuora_time(Time.now), token = create_token)
+        def create(id, timestamp = to_zuora_time(Time.now), token = create_token)
           PaymentForm.new(id, tenant_id, token, api_security_key, timestamp)
         end
 
@@ -76,7 +76,7 @@ module Zuora
           timestamp = from_zuora_time(response["timestamp"].to_i)
           return false if timestamp < Time.now - 300
           # Match the signature with the signature from zuora
-          create_payment_form(response["id"], response["timestamp"], response["token"]).signature == response["signature"]
+          create(response["id"], response["timestamp"], response["token"]).signature == response["responseSignature"]
         end
 
         def from_zuora_time(zuora_time)

@@ -51,7 +51,7 @@ describe Zuora::Ruby::PaymentForm do
 
     describe "creates instance that" do
       before do
-        @instance = Zuora::Ruby::PaymentForm.create_payment_form(@id, @timestamp, @token)
+        @instance = Zuora::Ruby::PaymentForm.create(@id, @timestamp, @token)
       end
 
       it "should generate example string" do
@@ -89,20 +89,20 @@ describe Zuora::Ruby::PaymentForm do
 
     it "should validate callback response" do
       timestamp = Zuora::Ruby::PaymentForm.to_zuora_time(Time.now - 200)
-      instance = Zuora::Ruby::PaymentForm.create_payment_form(@id, timestamp)
+      instance = Zuora::Ruby::PaymentForm.create(@id, timestamp)
       Zuora::Ruby::PaymentForm.validate("id" => @id, "timestamp" => timestamp,
-        "token" => instance.token, "signature" => instance.signature).should be_true
+        "token" => instance.token, "responseSignature" => instance.signature).should be_true
     end
 
     it "should not validate responses over 300 seconds late" do
       timestamp = Zuora::Ruby::PaymentForm.to_zuora_time(Time.now - 400)
-      instance = Zuora::Ruby::PaymentForm.create_payment_form(@id, timestamp)
+      instance = Zuora::Ruby::PaymentForm.create(@id, timestamp)
       Zuora::Ruby::PaymentForm.validate("id" => @id, "timestamp" => timestamp,
-        "token" => instance.token, "signature" => instance.signature).should_not be_true
+        "token" => instance.token, "responseSignature" => instance.signature).should_not be_true
     end
 
     it "should not validate invalid signatures" do
-      Zuora::Ruby::PaymentForm.validate("id" => @id, "signature" => "foo", "token" => "bar",
+      Zuora::Ruby::PaymentForm.validate("id" => @id, "responseSignature" => "foo", "token" => "bar",
         "timestamp" => Zuora::Ruby::PaymentForm.to_zuora_time(Time.now - 100)).should_not be_true
     end
   end
