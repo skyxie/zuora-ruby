@@ -504,6 +504,7 @@ class ProductRatePlan < ZObject
   
   belongs_to :product
   has_many :product_rate_plan_charge
+  has_many :rate_plan
 
   QUERY_FIELDS = %w{CreatedById CreatedDate Description EffectiveEndDate EffectiveStartDate 
                     Id Name ProductId UpdatedById UpdatedDate}
@@ -567,8 +568,10 @@ class ProductRatePlanCharge < ZObject
   attr_accessor :productRatePlanId
   attr_accessor :type
   attr_accessor :uOM
+  attr_accessor :chargeModel
+  attr_accessor :billingPeriod
 
-  def initialize(fieldsToNull = [], id = nil, accountingCode = nil, defaultQuantity = nil, description = nil, maxQuantity = nil, minQuantity = nil, model = nil, name = nil, productRatePlanId = nil, type = nil, uOM = nil)
+  def initialize(fieldsToNull = [], id = nil, accountingCode = nil, defaultQuantity = nil, description = nil, maxQuantity = nil, minQuantity = nil, model = nil, name = nil, productRatePlanId = nil, type = nil, uOM = nil, chargeModel = nil, billingPeriod = nil)
     @fieldsToNull = fieldsToNull
     @id = id
     @accountingCode = accountingCode
@@ -581,6 +584,19 @@ class ProductRatePlanCharge < ZObject
     @productRatePlanId = productRatePlanId
     @type = type
     @uOM = uOM
+    @chargeModel = chargeModel
+    @billingPeriod = billingPeriod
+  end
+
+  def term
+    case billingPeriod
+    when "Month"
+      1
+    when "Annual"
+      12
+    else
+      3
+    end
   end
 end
 
@@ -624,6 +640,11 @@ end
 class RatePlan < ZObject
   extend Zuora::Ruby::Model::ClassMethods
   include Zuora::Ruby::Model::InstanceMethods 
+  extend Zuora::Ruby::Model::Relationships
+
+  belongs_to :product_rate_plan
+  belongs_to :subscription
+  has_many :rate_plan_charge
 
   QUERY_FIELDS = %w{AmendmentId AmendmentSubscriptionRatePlanId AmendmentType CreatedById CreatedDate
                     Name ProductRatePlanId SubscriptionId UpdatedById UpdatedDate}
@@ -674,7 +695,11 @@ end
 class RatePlanCharge < ZObject
   extend Zuora::Ruby::Model::ClassMethods
   extend Zuora::Ruby::Model::EffectiveRange
+  extend Zuora::Ruby::Model::Relationships
   include Zuora::Ruby::Model::InstanceMethods 
+
+  belongs_to :rate_plan
+  belongs_to :product_rate_plan_charge
 
   QUERY_FIELDS = %w{AccountingCode ApplyDiscountTo BillCycleDay BillCycleType BillingPeriodAlignment
                     ChargedThroughDate ChargeModel ChargeNumber ChargeType CreatedById CreatedDate
@@ -784,7 +809,11 @@ end
 #   version - SOAP::SOAPInt
 class Subscription < ZObject
   extend Zuora::Ruby::Model::ClassMethods
+  extend Zuora::Ruby::Model::Relationships
   include Zuora::Ruby::Model::InstanceMethods 
+
+  has_many :rate_plan
+  belongs_to :account
   
   QUERY_FIELDS = %w{AccountId AutoRenew CancelledDate ContractAcceptanceDate
                     ContractEffectiveDate CreatedById CreatedDate CreatorAccountId
