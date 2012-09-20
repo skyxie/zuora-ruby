@@ -66,7 +66,11 @@ end
 #   updatedDate - SOAP::SOAPDateTime
 class Account < ZObject
   extend Zuora::Ruby::Model::ClassMethods
+  extend Zuora::Ruby::Model::Relationships
   include Zuora::Ruby::Model::InstanceMethods 
+
+  has_many :subscription
+  has_many :payment_method
 
   QUERY_FIELDS = %w{Id AccountNumber Balance AutoPay BillCycleDay BillToId CreatedById
                     CreatedDate CreditBalance Currency DefaultPaymentMethodId InvoiceTemplateId
@@ -384,6 +388,19 @@ end
 #   type - SOAP::SOAPString
 #   updatedDate - SOAP::SOAPDateTime
 class PaymentMethod < ZObject
+  extend Zuora::Ruby::Model::ClassMethods
+  extend Zuora::Ruby::Model::Relationships
+  include Zuora::Ruby::Model::InstanceMethods
+
+  belongs_to :account
+
+  QUERY_FIELDS = %W{Id AccountId AchAbaCode AchAccountName AchAccountNumber AchAccountNumberMask
+                    AchAccountType AchBankName Active CreatedDate CreditCardAddress1 CreditCardAddress2
+                    CreditCardCity CreditCardCountry CreditCardExpirationMonth CreditCardExpirationYear
+                    CreditCardHolderName CreditCardMaskNumber CreditCardNumber CreditCardPostalCode
+                    CreditCardState CreditCardType LastTransactionDateTime LastTransactionStatus
+                    Name PaypalBaid PaypalEmail Type UpdatedDate}
+
   attr_accessor :fieldsToNull
   attr_accessor :id
   attr_accessor :accountId
