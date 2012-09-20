@@ -503,7 +503,7 @@ class ProductRatePlan < ZObject
   include Zuora::Ruby::Model::InstanceMethods 
   
   belongs_to :product
-  had_many :product_rate_plan_charge
+  has_many :product_rate_plan_charge
 
   QUERY_FIELDS = %w{CreatedById CreatedDate Description EffectiveEndDate EffectiveStartDate 
                     Id Name ProductId UpdatedById UpdatedDate}
