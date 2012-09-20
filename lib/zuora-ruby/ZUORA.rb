@@ -459,8 +459,12 @@ end
 #   sKU - SOAP::SOAPString
 class Product < ZObject
   extend Zuora::Ruby::Model::ClassMethods
-  extend Zuora::Ruby::EffectiveRange
-  include Zuora::Ruby::Model::InstanceMethods 
+  extend Zuora::Ruby::Model::EffectiveRange
+  extend Zuora::Ruby::Model::Cache
+  extend Zuora::Ruby::Model::Relationships
+  include Zuora::Ruby::Model::InstanceMethods
+
+  has_many :product_rate_plan
 
   QUERY_FIELDS = %w{Id Name SKU Category Description EffectiveStartDate EffectiveEndDate}
 
@@ -493,9 +497,14 @@ end
 #   productId - (any)
 class ProductRatePlan < ZObject
   extend Zuora::Ruby::Model::ClassMethods
-  extend Zuora::Ruby::EffectiveRange
+  extend Zuora::Ruby::Model::EffectiveRange
+  extend Zuora::Ruby::Model::Cache
+  extend Zuora::Ruby::Model::Relationships
   include Zuora::Ruby::Model::InstanceMethods 
   
+  belongs_to :product
+  had_many :product_rate_plan_charge
+
   QUERY_FIELDS = %w{CreatedById CreatedDate Description EffectiveEndDate EffectiveStartDate 
                     Id Name ProductId UpdatedById UpdatedDate}
   
@@ -532,7 +541,11 @@ end
 #   uOM - SOAP::SOAPString
 class ProductRatePlanCharge < ZObject
   extend Zuora::Ruby::Model::ClassMethods
+  extend Zuora::Ruby::Model::Cache
+  extend Zuora::Ruby::Model::Relationships
   include Zuora::Ruby::Model::InstanceMethods 
+
+  belongs_to :product_rate_plan
   
   QUERY_FIELDS = %w{AccountingCode BillCycleDay BillCycleType BillingPeriod
                     BillingPeriodAlignment ChargeModel ChargeType CreatedById CreatedDate
@@ -660,7 +673,7 @@ end
 #   uOM - SOAP::SOAPString
 class RatePlanCharge < ZObject
   extend Zuora::Ruby::Model::ClassMethods
-  extend Zuora::Ruby::EffectiveRange
+  extend Zuora::Ruby::Model::EffectiveRange
   include Zuora::Ruby::Model::InstanceMethods 
 
   QUERY_FIELDS = %w{AccountingCode ApplyDiscountTo BillCycleDay BillCycleType BillingPeriodAlignment

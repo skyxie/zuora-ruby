@@ -12,7 +12,11 @@ module Zuora
 
       module ClassMethods
         def model_name
-          self.name.gsub(/^ZUORA::/,'')
+          self.name.split(/::/).last
+        end
+
+        def namespace
+          self.name.split(/::/)[0..-2].join.constantize
         end
 
         # Applies conditions to a query and requests the query to zuora
@@ -41,6 +45,7 @@ module Zuora
           find("Name = #{name}")
         end
       end
+
 
     end
 

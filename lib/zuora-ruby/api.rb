@@ -14,12 +14,10 @@ module Zuora
         return results
       end
       
-      def create(objs)
-        return driver.create(objs)
-      end
-      
-      def update(objs)
-        return driver.update(objs)
+      %w{create update subscribe delete}.each do |method|
+        self.define_method(method) do |objs|
+          driver.send(method, objs)
+        end
       end
 
       def login(username, password, logstream=STDERR)
@@ -44,6 +42,10 @@ module Zuora
         else
           raise "Not logged in!"
         end
+      end
+
+      def clear
+        @session = nil
       end
     end
 
