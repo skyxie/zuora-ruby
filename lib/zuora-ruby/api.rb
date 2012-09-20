@@ -15,7 +15,7 @@ module Zuora
       end
       
       %w{create update subscribe delete}.each do |method|
-        self.define_method(method) do |objs|
+        define_method(method) do |objs|
           driver.send(method, objs)
         end
       end
