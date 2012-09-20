@@ -7,9 +7,8 @@ A super-simple Ruby library to access the Zuora API based on zuora/ruby-quicksta
     require 'zuora-ruby'
     Zuora::Ruby::Api.login("username", "password")
     
-    Zuora::Ruby::Subscription.all # Get all subscriptions
+    ZUORA::Subscription.all # Get all subscriptions
 
-    Zuora::Ruby::Product.all # Get all products
-    Zuora::Ruby::Product.effective_at(Time.now) # Get all active products
+    ZUORA::Product.all # Get all products
+    ZUORA::Product.effective_at(Time.now) # Get all active products
 
-This is based on the version 38 wisdl
