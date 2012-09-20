@@ -38,11 +38,11 @@ module Zuora
         end
 
         def find_by_id(id)
-          find("Id = #{id}")
+          find("Id = '#{id}'")
         end
 
         def find_by_name(name)
-          find("Name = #{name}")
+          find("Name = '#{name}'")
         end
       end
 
