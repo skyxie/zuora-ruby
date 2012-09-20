@@ -2,6 +2,8 @@ PATH
   remote: .
   specs:
     zuora-ruby (0.0.1)
+      activesupport
+      soap4r
 
 GEM
   remote: http://rubygems.org/
