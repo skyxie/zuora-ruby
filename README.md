@@ -13,5 +13,5 @@ A super-simple Ruby library to access the Zuora API based on zuora/ruby-quicksta
     product.find_by_id("abcd") # Find a particular product by ID
     product.product_rate_plans # Get all product rate plans for that product
 
-    Subscription.effective_at(some_time) # Find all subscriptions effective at a particular time
+    ZUORA::Subscription.effective_at(some_time) # Find all subscriptions effective at a particular time
 
