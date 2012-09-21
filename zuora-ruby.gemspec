@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Zuora::Ruby::VERSION
   gem.authors       = ["Tian Xie"]
   gem.email         = ["tian@animoto.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Library to access Zuora API in ruby}
+  gem.summary       = %q{Library build from the Zuora SOAP wsdl to access their API}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
