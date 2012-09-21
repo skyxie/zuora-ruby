@@ -38,7 +38,7 @@ module Zuora
         end
 
         def find_by_id(id)
-          find("Id = '#{id}'")
+          find("Id = '#{id}'").first
         end
 
         def find_by_name(name)

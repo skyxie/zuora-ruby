@@ -69,6 +69,7 @@ class Account < ZObject
   extend Zuora::Ruby::Model::Relationships
   include Zuora::Ruby::Model::InstanceMethods 
 
+  has_many :invoice
   has_many :subscription
   has_many :payment_method
 
@@ -270,6 +271,14 @@ end
 #   status - SOAP::SOAPString
 #   targetDate - SOAP::SOAPDateTime
 class Invoice < ZObject
+  extend Zuora::Ruby::Model::ClassMethods
+  extend Zuora::Ruby::Model::Relationships
+  include Zuora::Ruby::Model::InstanceMethods
+
+  belongs_to :account
+
+  QUERY_FIELDS = %w{Id AccountId Amount Balance Body DueDate InvoiceDate InvoiceNumber Status TargetDate}
+
   attr_accessor :fieldsToNull
   attr_accessor :id
   attr_accessor :accountId
@@ -400,6 +409,7 @@ class PaymentMethod < ZObject
                     CreditCardHolderName CreditCardMaskNumber CreditCardNumber CreditCardPostalCode
                     CreditCardState CreditCardType LastTransactionDateTime LastTransactionStatus
                     Name PaypalBaid PaypalEmail Type UpdatedDate}
+
 
   attr_accessor :fieldsToNull
   attr_accessor :id
@@ -857,8 +867,9 @@ class Subscription < ZObject
   attr_accessor :status
   attr_accessor :termStartDate
   attr_accessor :version
+  attr_accessor :termType
 
-  def initialize(fieldsToNull = [], id = nil, accountId = nil, autoRenew = nil, cancelledDate = nil, contractAcceptanceDate = nil, contractEffectiveDate = nil, currency = nil, initialTerm = nil, name = nil, notes = nil, originalSubscriptionId = nil, previousSubscriptionId = nil, renewalTerm = nil, serviceActivationDate = nil, status = nil, termStartDate = nil, version = nil)
+  def initialize(fieldsToNull = [], id = nil, accountId = nil, autoRenew = nil, cancelledDate = nil, contractAcceptanceDate = nil, contractEffectiveDate = nil, currency = nil, initialTerm = nil, name = nil, notes = nil, originalSubscriptionId = nil, previousSubscriptionId = nil, renewalTerm = nil, serviceActivationDate = nil, status = nil, termStartDate = nil, version = nil, termType = nil)
     @fieldsToNull = fieldsToNull
     @id = id
     @accountId = accountId
@@ -877,6 +888,7 @@ class Subscription < ZObject
     @status = status
     @termStartDate = termStartDate
     @version = version
+    @termType = termType
   end
 end
 
@@ -1030,6 +1042,12 @@ end
 #   subscriptionNumber - SOAP::SOAPString
 #   success - SOAP::SOAPBoolean
 class SubscribeResult
+  extend Zuora::Ruby::Model::Relationships
+
+  belongs_to :subscription
+  belongs_to :account
+  belongs_to :invoice
+
   attr_accessor :accountId
   attr_accessor :accountNumber
   attr_accessor :errors
