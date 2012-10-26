@@ -5,25 +5,15 @@ describe Zuora::Ruby::Api do
     Zuora::Ruby::Api.clear
   end
 
-  describe "login success" do
-    before do
-      FakeWeb.register_uri(:post, ZUORA::Soap::DefaultEndpointUrl, :body => xml_mock("login_success"))
-    end
-
-    it "should return and save the session header" do
-      Zuora::Ruby::Api.login("hello", "world", nil).should == "foobar"
-      Zuora::Ruby::Api.session.nil?.should_not be_true
-      Zuora::Ruby::Api.session.session.should == "foobar"
-    end
+  it "should return and save the session header" do
+    FakeWeb.register_uri(:post, ZUORA::Soap::DefaultEndpointUrl, :body => xml_mock("login_success"))
+    Zuora::Ruby::Api.login("hello", "world", nil).should == "foobar"
+    Zuora::Ruby::Api.session.nil?.should_not be_true
+    Zuora::Ruby::Api.session.session.should == "foobar"
   end
 
-  describe "login failed" do
-    before do
-      FakeWeb.register_uri(:post, ZUORA::Soap::DefaultEndpointUrl, :body => xml_mock("login_failed"))
-    end
-
-    it "should return and save the session header" do
-      lambda {Zuora::Ruby::Api.login("hello", "world", nil) }.should raise_error(SOAP::FaultError)
-    end
+  it "should return and save the session header" do
+    FakeWeb.register_uri(:post, ZUORA::Soap::DefaultEndpointUrl, :body => xml_mock("login_failed"))
+    lambda {Zuora::Ruby::Api.login("hello", "world", nil) }.should raise_error(SOAP::FaultError)
   end
 end
